@@ -1,0 +1,28 @@
+\name{crownHeightPine}
+\alias{crownHeightPine}
+\title{Crown height of pine}
+\usage{
+  crownHeightPine(d, h)
+}
+\arguments{
+  \item{d}{Diameter in breast height (cm)}
+
+  \item{h}{Tree height (m)}
+}
+\value{
+  k crownheight (m)
+}
+\description{
+  Compute crown height of single trees using Norwegian only
+  for pine...
+}
+\author{
+  Hans Ole {\O}rka \email{hans.ole.orka@gmail.org}
+}
+\references{
+  Brantseg 1967
+}
+\seealso{
+  volumeTreePine2
+}
+

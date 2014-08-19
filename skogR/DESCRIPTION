@@ -1,0 +1,24 @@
+Package: skogR
+Type: Package
+Title: Norske skogfunksjoner (Norwegian Forestry Functions)
+Version: 0.1.1
+Date: 2013-05-16
+Author: Hans Ole /Slash{O}rka
+Maintainer: Hans Ole /Slash{O}rka <hans.ole.orka@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: GPL-2
+LazyLoad: yes
+Collate:
+    'skogR.R'
+    'skogRNews.R'
+    'volumeDoubbleBark.R'
+    'volumeTree.R'
+    'volumeTreeBirch.R'
+    'volumeTreePine.R'
+    'volumeTreeSpruce.R'
+    'volumeStand.R'
+    'crownHeightPine.R'
+    'volumeTreeBroadleaved.R'
+    'volumeTreePine2.R'
+    'siteIndex.R'
+    'biomassTree.R'

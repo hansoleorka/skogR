@@ -1,0 +1,19 @@
+\name{skogR.News}
+\alias{skogR.News}
+\title{Show the NEWS file.}
+\usage{
+  skogR.News()
+}
+\value{
+  None
+}
+\description{
+  Show the NEWS file of the NorForFunc package.
+}
+\examples{
+skogR.News()
+}
+\author{
+  Hans Ole Ørka \email{hans.ole.orka@gmail.org}
+}
+

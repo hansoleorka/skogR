@@ -1,0 +1,30 @@
+\name{siteindex}
+\alias{siteindex}
+\title{Site index}
+\usage{
+  siteindex(age, HL, SP)
+}
+\arguments{
+  \item{age}{age in breast height}
+
+  \item{HL}{Lorey's mean height}
+
+  \item{SP}{species code (1=spruce, 2= pine, 3= brich)}
+
+  \item{Vestlandet}{character for using functions
+  representative for western-Norway either "coast" or
+  "interior"}
+}
+\value{
+  V Volume including bark (m3/ha)
+}
+\description{
+  Compute site index curves
+}
+\details{
+  ?
+}
+\author{
+  Hans Ole Ørka \email{hans.ole.orka@gmail.org}
+}
+

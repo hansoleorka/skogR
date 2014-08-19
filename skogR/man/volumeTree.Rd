@@ -1,0 +1,78 @@
+\name{volumeTree}
+\alias{volumeTree}
+\alias{volumeTreeBirch}
+\alias{volumeTreeBroadleaved}
+\alias{volumeTreePine}
+\alias{volumeTreePine2}
+\alias{volumeTreeSpruce}
+\title{Single Tree volume}
+\usage{
+  volumeTree(d, h, sp, aboveBark = TRUE)
+
+  volumeTreeBirch(d, h, aboveBark = TRUE)
+
+  volumeTreePine(d, h, aboveBark = TRUE)
+
+  volumeTreeSpruce(d, h, aboveBark = TRUE)
+
+  volumeTreeBroadleaved(d, h)
+
+  volumeTreePine2(d, h, k, b, aboveBark = TRUE)
+}
+\arguments{
+  \item{d}{Diameter in breast height in centimeter}
+
+  \item{h}{Tree height in meter}
+
+  \item{sp}{vektor med treslag; 1=gran, 2=furu, 3=lauv}
+
+  \item{aboveBark}{a logical value indicating if volume
+  above (TRUE) or below bark (FALSE).}
+
+  \item{k}{crownheight}
+
+  \item{b}{doublebark}
+}
+\value{
+  v volum in liters (dm3)
+}
+\description{
+  Compute stem volume of single trees using Norwegian
+  single tree volume functions
+
+  2
+}
+\details{
+  Dette er en hovedfuksjon.
+
+  The shift of pine function according to diameter is on
+  <11
+}
+\author{
+  Hans Ole Ørka \email{hans.ole.orka@gmail.org}
+}
+\references{
+  Braastad, H. 1966. Volume tables for birch. Reports of
+  the Norwegian Forest Research Institute, 21, 265-365.
+
+  Brantseg, A. 1967. Volume functions and tables for Scots
+  pine. South Norway. Reports of the Norwegian Forest
+  Research Institute, 12, 689-739.
+
+  Vestjordet, E. 1967. Functions and tables for volume of
+  standing trees. Norway spruce. Reports of the Norwegian
+  Forest Research Institute, 22, 539-574.
+
+  Braastad, H. 1966. Volume tables for birch. Reports of
+  the Norwegian Forest Research Institute, 21, 265-365.
+
+  Brantseg, A. 1967. Volume functions and tables for Scots
+  pine. South Norway. Reports of the Norwegian Forest
+  Research Institute, 12, 689-739.
+}
+\seealso{
+  volumeDoubbleBark
+
+  volumeDoubleBark crownHeightPine
+}
+
