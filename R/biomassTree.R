@@ -45,7 +45,7 @@
 #' spruce and birch in Sweden (Report No. 45). Swedish University of Agricultural Sciences, Ume?.
 
 #'
-#' @author Marius Hauglin (2013) \email{marius.hauglin@@umb.no}
+#' @author Marius Hauglin (2013) \email{marius.hauglin@@nmbu.no}
 
 
 
