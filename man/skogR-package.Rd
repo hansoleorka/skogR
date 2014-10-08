@@ -36,5 +36,14 @@ Maintainer: Who to complain to <yourfault@somewhere.net>
 ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
+library(skogR)
+data(trees)
+?volumeTree
+Species <- as.character(retentionTrees$Otrsl)
+sp <- ifelse(Species == "G",1,ifelse(Species == "F",2,ifelse(Species == "L",3,NA)))
+
+d <- retentionTrees$Odbh/10
+h <- retentionTrees$Ohoyde/10
+
+v <- volumeTree(retentionTrees$Odbh/10,retentionTrees$Ohoyde/10,Species)
 }

@@ -8,17 +8,3 @@ Maintainer: Hans Ole /Slash{O}rka <hans.ole.orka@gmail.com>
 Description: More about what it does (maybe more than one line)
 License: GPL-2
 LazyLoad: yes
-Collate:
-    'skogR.R'
-    'skogRNews.R'
-    'volumeDoubbleBark.R'
-    'volumeTree.R'
-    'volumeTreeBirch.R'
-    'volumeTreePine.R'
-    'volumeTreeSpruce.R'
-    'volumeStand.R'
-    'crownHeightPine.R'
-    'volumeTreeBroadleaved.R'
-    'volumeTreePine2.R'
-    'siteIndex.R'
-    'biomassTree.R'
