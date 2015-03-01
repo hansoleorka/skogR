@@ -7,8 +7,8 @@
 #' @param sp Numerical vector with tree species (1 = Norway spruce, 2 = Scots Pine, 3 = Birch)
 #' @param components String vector specifying which biomass components to return:
 #' 
-#'  \itemize {
-#'  \item \bold{sb} \hspace{20 mm} Biomass of stem bark
+#'  \itemize{
+#'  \item \bold{sb}  20 mm Biomass of stem bark
 #'  \item \bold{sw}  Stem wood biomass
 #'  \item \bold{st}  Total stem biomass (sw+sb)
 #'  \item \bold{fl}  Foliage biomass
@@ -22,7 +22,7 @@
 #'  \item \bold{sr}  Biomass of stump-root system *
 #'  \item \bold{ab}  Total aboveground biomass (st+cr)
 #' 
-#'  \item \bold{all }  All the above components
+#'  \item \bold{all}  All the above components
 #'	}
 #' 
 #' @return A data frame with the dry weight biomass (kg) for the specified components. Column names and order will be the same as in components.

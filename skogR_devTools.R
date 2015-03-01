@@ -1,3 +1,3 @@
 library(roxygen2)
-roxygenize(package.dir="D:\\github\\skogR\\")
+roxygenize(package.dir="C:\\hao\\github\\skogR\\")
 
