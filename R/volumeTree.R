@@ -10,7 +10,7 @@
 #' @seealso volumeDoubbleBark
 #' @details Dette er en hovedfuksjon. 
 #' @rdname volumeTree
-#' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
+#' @author Hans Ole Oerka \email{hans.ole.orka@@gmail.org}
 volumeTree <- function(d,h,sp,aboveBark=TRUE){
      vs <-volumeTreeSpruce(d,h,aboveBark=aboveBark)
      vp <-volumeTreePine(d,h,aboveBark=aboveBark)
