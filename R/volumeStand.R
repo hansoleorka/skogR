@@ -10,6 +10,7 @@
 #' @details ?
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
 #' @references Vestjordet 1959,Brantseg 1959,Næsset 1994a, Næsset 1995a,b
+#' @example volumeStand(16,16,2)
 
 volumeStand <- function(G,HL,SP,Vestlandet=NULL){
 	
@@ -23,10 +24,11 @@ volumeStand <- function(G,HL,SP,Vestlandet=NULL){
 	VB <- -0.0660 + 0.3863 * G * HL + 1.0203 * G
      
      
-	V = ifelse(SP==1,VS,ifelse(SP==2,VP,ifelse(SP!=1 & SP!=2,VB,NA)))
+	V = ifelse(SP==1,VS,ifelse(SP==2,VP,ifelse(SP==3,VB,NA)))
      
      #Vestlandet
-     if(Vestlandet %in% c("coast","interior")){
+     if(is.null(Vestlandet)==FALSE){
+
      #Næsset 1994a
      VpVN <- 0.8505 * G^0.9943 * HL^0.8021
      
