@@ -13,6 +13,9 @@
 #' Brantseg, A. 1967. Volume functions and tables for Scots pine. South Norway. Reports of the Norwegian Forest Research Institute, 12, 689-739.
 #' Vestjordet, E. 1967. Functions and tables for volume of standing trees. Norway spruce. Reports of the Norwegian Forest Research Institute, 22, 539-574.
 #' Fitje A. 1995. 
+#' @export 
+
+
 
 volumeDoubleBark <- function(d,h,sp,Fitje1995=FALSE){
      

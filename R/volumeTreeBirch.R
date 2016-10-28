@@ -1,5 +1,7 @@
 #' @rdname volumeTree
 #' @references Braastad, H. 1966. Volume tables for birch. Reports of the Norwegian Forest Research Institute, 21, 265-365.
+#' @export
+
 volumeTreeBirch <- function(d,h,aboveBark=TRUE){
      
      # VOLUM MED BARK I DM3.

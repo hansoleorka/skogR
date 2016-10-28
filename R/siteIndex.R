@@ -9,6 +9,8 @@
 #' @return V Volume including bark (m3/ha)
 #' @details ?
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
+#' @export
+
 siteindex <- function(age,HL,SP){
 
      # Calculate H40 SPRUCE

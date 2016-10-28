@@ -3,6 +3,8 @@
 #' @seealso volumeDoubleBark crownHeightPine
 #' @rdname volumeTree
 #' @references Brantseg, A. 1967. Volume functions and tables for Scots pine. South Norway. Reports of the Norwegian Forest Research Institute, 12, 689-739.
+#' @export
+
 volumeTreePine2 <- function(d,h,k,b,aboveBark=TRUE){
 
      # VOLUM MED BARK I DM3. D <= 12CM ER VFB1 OG D > 12CM ER VFB2.

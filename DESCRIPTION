@@ -1,10 +1,10 @@
 Package: skogR
 Type: Package
 Title: Norske skogfunksjoner (Norwegian Forestry Functions)
-Version: 0.1.1
-Date: 2013-05-16
-Author: Hans Ole /Slash{O}rka
+Version: 0.2
+Date: 2016-10-27
+Author: Hans Ole /Slash{O}rka and Marius Hauglin
 Maintainer: Hans Ole /Slash{O}rka <hans.ole.orka@gmail.com>
-Description: More about what it does (maybe more than one line)
+Description: Norske skogfunksjoner (Norwegian Forestry Functions)
 License: GPL-2
 LazyLoad: yes

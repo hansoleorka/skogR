@@ -10,7 +10,7 @@
 #' @details ?
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
 #' @references Vestjordet 1959,Brantseg 1959,Næsset 1994a, Næsset 1995a,b
-#' @example volumeStand(16,16,2)
+#' @export
 
 volumeStand <- function(G,HL,SP,Vestlandet=NULL){
 	

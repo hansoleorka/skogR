@@ -2,6 +2,8 @@
 #' @details The shift of pine function according to diameter is on <11
 #' @rdname volumeTree
 #' @references Brantseg, A. 1967. Volume functions and tables for Scots pine. South Norway. Reports of the Norwegian Forest Research Institute, 12, 689-739.
+#' @export
+
 volumeTreePine <- function(d,h,aboveBark=TRUE){
 	
      # VOLUM MED BARK I DM3. D <= 12CM ER VFB1 OG D > 12CM ER VFB2.

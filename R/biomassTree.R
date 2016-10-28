@@ -46,7 +46,7 @@
 
 #'
 #' @author Marius Hauglin (2013) \email{marius.hauglin@@nmbu.no}
-
+#' @export
 
 
 biomassTree<-function(d,h=NA,sp,components=c('all')){

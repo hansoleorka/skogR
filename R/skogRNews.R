@@ -6,6 +6,8 @@
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
 #' @examples 
 #' skogR.News()
+#' @export 
+
 
 skogR.News <- function () 
 {

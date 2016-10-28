@@ -1,5 +1,7 @@
 #' @rdname volumeTree
 #' @references Vestjordet, E. 1967. Functions and tables for volume of standing trees. Norway spruce. Reports of the Norwegian Forest Research Institute, 22, 539-574.
+#' @export
+
 volumeTreeSpruce <- function(d,h,aboveBark=TRUE){
      # VOLUM MED BARK I DM3. D <= 10CM ER VGB1, 10CM < D <= 13CM ER VGB2 OG D > 13CM ER VGB3
 	if(aboveBark){

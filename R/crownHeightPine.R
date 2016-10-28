@@ -8,6 +8,8 @@
 #' @seealso volumeTreePine2
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
 #' @references Brantseg 1967
+#' @export
+
 crownHeightPine <- function(d,h){
     k <- 4.1203 - 0.002817*d*d + 0.26234*h*h - 0.3184*(d/h)*(d/h)
     return(k)

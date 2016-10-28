@@ -11,6 +11,8 @@
 #' @details Dette er en hovedfuksjon. 
 #' @rdname volumeTree
 #' @author Hans Ole Oerka \email{hans.ole.orka@@gmail.org}
+#' @export
+
 volumeTree <- function(d,h,sp,aboveBark=TRUE){
      vs <-volumeTreeSpruce(d,h,aboveBark=aboveBark)
      vp <-volumeTreePine(d,h,aboveBark=aboveBark)
