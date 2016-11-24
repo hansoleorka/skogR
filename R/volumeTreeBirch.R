@@ -3,10 +3,10 @@
 #' @export
 
 volumeTreeBirch <- function(d,h,aboveBark=TRUE){
-     
+     sp1 <- rep(3,length(d)
      # VOLUM MED BARK I DM3.
 	if(aboveBark){
-	     B <- volumeDoubleBark(d,h,sp=3)
+	     B <- volumeDoubleBark(d,h,sp=sp1)
 		v = -1.25409 + 0.12739 * d * d + 0.03166 * d * d * h + 0.0009752 * d * h * h - 0.01226 * h * h - 0.004214 * d * d * B
 	}
 	
