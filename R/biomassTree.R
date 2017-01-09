@@ -42,7 +42,7 @@
 #' \emph{even if height values are provided.}
 #'
 #' @references Marklund, L.G., 1988. Biomass functions for pine, 
-#' spruce and birch in Sweden (Report No. 45). Swedish University of Agricultural Sciences, Ume?.
+#' spruce and birch in Sweden (Report No. 45). Swedish University of Agricultural Sciences, Umeå.
 
 #'
 #' @author Marius Hauglin (2013) \email{marius.hauglin@@nmbu.no}

@@ -4,32 +4,30 @@
 #'
 #' @param plotid vector giving the plotid for each tree
 #' @param d numerical vector; diameters in cm.
-#' @param sp numerical vector; species.
+#' @param sp numerical vector; species. (1 = spruce, 2 = pine, 3 = deciduous).
 #' @param h numerical vector; heights in m.
-#' @param correction logical; Should be TRUE if sample trees are selected from only inside the plot.
+#' @param correction logical; Should be TRUE if sample trees are selected with relascope but from only inside the plot.
 #' @param rel_factor numerical; if correction is TRUE a relascope factor must be given.
 #' @param plot_radius numerical; if correction is TRUE a plot radius must be given. 
-#' @param outside_plot logical vector; indicating if a tree is outside the plot. Optional.
-#' @param esth_method numerical; giving the method to use for estimation of tree heights. See details.
+#' @param outside_plot logical vector; indicating if a tree is outside the plot. Optional. 
+#' Trees outside the plot will only be used to calculate the correction factor.
 #' 
 #' @return a data frame with the following columns:
 #' 
-#'
-#' @note Trees outside the plot will be used to calculate the correction factor.
 #'
 #' @references Eid, T., Fitje, A., and Hoen, H.F. (2002) Økonomi og planlegging. Gan Forlag, Oslo. 205 s.
 #' @references Bollandsås, O.M. (2007). Calculating volume on the field plots of the Norwegian National Forest Inventory. Unpublished. 
 #'
 #' 
-#' @author Marius Hauglin 2016 \email{marius.hauglin@@nmbu.no}
+#' @author Marius Hauglin 2017 \email{marius.hauglin@@gmail.com}
 #' @export
 
 
 
-fieldPlot<-function(plotid,d,sp,h,correction,rel_factor=NA,plot_radius=NA,outside_plot=NA,esth_method=1){
+fieldPlot<-function(plotid,d,sp,h,correction=FALSE,rel_factor=NA,plot_radius=NA,outside_plot=NA){
 
 	
-if (is.na(outside_plot[1])) outside_plot<-rep(FALSE,length(plotid))
+if (length(outside_plot) == 1) outside_plot<-rep(FALSE,length(plotid))
 if (is.na(rel_factor[1])) rel_factor<-rep(NA,length(plotid))
 if (is.na(plot_radius[1])) plot_radius<-rep(NA,length(plotid))
 
@@ -37,17 +35,17 @@ if (length(rel_factor) == 1) rel_factor<-rep(rel_factor,length(plotid))
 if (length(plot_radius) == 1) plot_radius<-rep(plot_radius,length(plotid))
 
 
-# check consistency
-if (!all.equal(length(plotid),length(d),length(sp),length(h),length(outside_plot))) stop ('all input vectors must be of equal length.')
+# check consistency / give warnings
+if ( length(unique(c(length(plotid),length(d),length(sp),length(h),length(outside_plot)) )) >1 )stop ('all input vectors must be of equal length.')
 if (correction) if (is.na(rel_factor[1]) | is.na(plot_radius[1])) stop ('radius and relascope factor needed for correction.')
-
+if (correction) if (any(outside_plot)) warning ('correction=TRUE and trees outside_plot')
 
 
 
 klaving<-data.frame(plotid=plotid,d=d,sp=sp,h=h,outside_plot=outside_plot,rel_factor=rel_factor,radius=plot_radius)
 
 # grunnflate alle trær
-klaving$grfl<-((klaving$d/1000)*(klaving$d/1000) )*(pi/4) # m2
+klaving$grfl<-((klaving$d/100)*(klaving$d/100) )*(pi/4) # m2
 
 # basisvolum
 klaving$basish<-basisHeight(d=klaving$d,sp=klaving$sp)
@@ -61,81 +59,51 @@ klaving$vol<-volumeTree(d=klaving$d,sp=klaving$sp,h=klaving$h)
 klaving$weight<-1
 if (correction){
 	klaving$ps_ha<-( (klaving$radius * klaving$radius) * pi ) /10000 # m2
-	klaving$limit_diam<-klaving$radius/(50/sqrt(klaving$rel_factor))
-	klaving$weight[klaving$d < klaving$limit_diam]<-(klaving$rel_factor*klaving$ps_ha)/klaving$grfl
+	klaving$limit_diam<-klaving$radius/(50/sqrt(klaving$rel_factor)) # m
+	klaving$weight[klaving$d/100 < klaving$limit_diam]<-( (klaving$rel_factor*klaving$ps_ha)/klaving$grfl )[klaving$d/100 < klaving$limit_diam]
 }
 
 
 
 # korreksjonsfaktor prøvetrær (andre får NA)
 klaving$kf<-klaving$vol/klaving$basisvol
-klaving$kf_h<-klaving$h/klaving$basish
 
 
-# sett korreksjonsfaktor for volum
+# sett korreksjonsfaktor for volum flatevis
 for (i in unique(klaving$plotid)) {
-	for (j in unique(klaving$sp)) {
-		
-	klaving$kf[klaving$plotid == i & klaving$sp == j & is.na(klaving$kf)]<-
-			weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == j],
-						    klaving$weight[klaving$plotid == i & klaving$sp == j],na.rm=TRUE)
 	
-	klaving$kf[klaving$plotid == i & 
-				klaving$sp == j & 
-				is.na(klaving$h) & 
-				nrow(klaving[klaving$plotid == i & klaving$sp == j & !is.na(klaving$h),]) < 3]<-NA # hvis mindre enn tre prøvtær
-	}
+	kf1<-kf2<-kf3<-NA
+	
+	kf1<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 1],klaving$weight[klaving$plotid == i & klaving$sp == 1],na.rm=TRUE)
+	kf2<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 2],klaving$weight[klaving$plotid == i & klaving$sp == 2],na.rm=TRUE)
+	kf3<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 3],klaving$weight[klaving$plotid == i & klaving$sp == 3],na.rm=TRUE)
+	
+	# hvis det mangler prøvetre av et treslag, konverter fra kor.faktor fra et av de andre treslagene
+	if (is.na(kf1))kf1<-corFactor(sp=2,cf=kf2)[1]
+	if (is.na(kf1))kf1<-corFactor(sp=3,cf=kf3)[1]
+	
+	if (is.na(kf2))kf2<-corFactor(sp=1,cf=kf1)[2]
+	if (is.na(kf2))kf2<-corFactor(sp=3,cf=kf3)[2]
+	
+	if (is.na(kf3))kf3<-corFactor(sp=1,cf=kf1)[3]
+	if (is.na(kf3))kf3<-corFactor(sp=2,cf=kf2)[3]
+	
+	klaving$kf[klaving$plotid == i & klaving$sp == 1]<-kf1
+	klaving$kf[klaving$plotid == i & klaving$sp == 2]<-kf2
+	klaving$kf[klaving$plotid == i & klaving$sp == 3]<-kf3
+	
 }
 
 
 
-# korreksjonsfaktor høyde, til bruk i beregning av estimert høyde -> beregning av overhøyde
-for (i in unique(klaving$plotid)) {
-	for (j in unique(klaving$sp)) {
-		
-		klaving$kf_h[klaving$plotid == i & klaving$sp == j & is.na(klaving$kf_h)]<-
-		weighted.mean(klaving$kf_h[klaving$plotid == i & klaving$sp == j],
-				klaving$weight[klaving$plotid == i & klaving$sp == j],na.rm=TRUE)
-		
-		klaving$kf_h[klaving$plotid == i & 
-						klaving$sp == j & 
-						is.na(klaving$h) & 
-						nrow(klaving[klaving$plotid == i & klaving$sp == j & !is.na(klaving$h),]) < 3]<-NA # hvis mindre enn tre prøvtær
-	}
-}
-
-
-
-# global korreksjonsfaktor for de med mindre enn tre trær av et treslag på flata
-for (i in unique(klaving$sp) ) {
-	
-	klaving$kf[is.na(klaving$kf) & klaving$sp == i]<-weighted.mean(klaving$kf[klaving$sp == i],
-			klaving$weight[klaving$sp == i],
-			na.rm=TRUE)	
-	
-	klaving$kf_h[is.na(klaving$kf_h) & klaving$sp == i]<-weighted.mean(klaving$kf_h[klaving$sp == i],
-			klaving$weight[klaving$sp == i],
-			na.rm=TRUE)	
-}
-
-
-# volum alle trær
+# volum alle trær (prøvetrær beholder tidligere beregnet volum)
 klaving$vol[is.na(klaving$vol)]<-klaving$basisvol[is.na(klaving$vol)]*klaving$kf[is.na(klaving$vol)]
 
 
 
-# 1) beregnede høyder alle trær - korreksjonsfaktor
-if (esth_method == 1) klaving$h_est<-klaving$basish*klaving$kf_h
+# beregnede høyder alle trær - baklengs i volumfunksjoner
+klaving$h_est<-heigthFromVolume(klaving$vol,klaving$d,klaving$sp)
 
-
-
-# 2) beregnede høyder alle trær - baklengs i volumfunksjoner
-if (esth_method == 2) klaving$h_est<-heigthFromVolume(klaving$vol,klaving$d,klaving$sp)
-
-
-	
-	
-	
 
 # setter inn feltmålt høyde for prøvetrær
 klaving$h_est[!is.na(klaving$h)]<-klaving$h[!is.na(klaving$h)]
@@ -158,7 +126,7 @@ for (i in 1:nrow(restab)) {
 	f<-klaving[klaving$plotid == fn & klaving$sp == 2,] # furu
 	l<-klaving[klaving$plotid == fn & klaving$sp == 3,] # lauv
 	
-	area<-klaving$area[klaving$plotid == fn][1]
+	area<-round((klaving$radius[klaving$plotid == fn][1])^2 * pi,0)
 	
  restab$plotID[i]<-fn
  restab$plotSIZE[i]<-round(area,0) # m2
@@ -181,9 +149,12 @@ for (i in 1:nrow(restab)) {
  restab$N_d[i]<-round((nrow(l)/area)*10000,0)
  restab$N_tot[i]<-round((nrow(a)/area)*10000,0)
  
- # høyder
- restab$H_lor[i]<-mean(a$h,na.rm=TRUE) # trær plukket ut med relaskop  
- restab$H_dom[i]<-domHeight(a$h_est,a$DBH,area) 
+ # grunnflateveid middelhøyde
+ # restab$H_lor[i]<-mean(a$h,na.rm=TRUE) # middelhøyde som snitt av trær plukket ut med relaskop  
+   restab$H_lor[i]<-weighted.mean(a$h_est,a$grfl) # middelhøyde som vektet snitt av (estimerte) høyder
+	
+ # overhøyde
+ restab$H_dom[i]<-domHeight(a$h_est,a$d,area) 
 	
   
  

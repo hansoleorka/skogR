@@ -2,9 +2,11 @@
 
 export(basisHeight)
 export(biomassTree)
+export(corFactor)
 export(crownHeightPine)
 export(domHeight)
 export(fieldPlot)
+export(fraStikkliste)
 export(heigthFromVolume)
 export(siteindex)
 export(skogR.News)
