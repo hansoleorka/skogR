@@ -14,7 +14,7 @@ More about what it does (maybe more than one line)
 \tabular{ll}{
 Package: \tab skogR\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 0.3\cr
 Date: \tab 2013-05-16\cr
 License: \tab What license is it under?\cr
 }
