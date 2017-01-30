@@ -14,7 +14,7 @@
 
 siteindex <- function(age,HL,SP,method="TVEITE-BRAASTAD"){
      
-     if(method==){
+     if(method=="TVEITE-BRAASTAD"){
           
           # Calculate H40 SPRUCE
           #-------------------------------------------------------------------------------------------------------
