@@ -52,7 +52,7 @@ siteindex <- function(age,HL,SP,method="TVEITE-BRAASTAD"){
           H_birch = HL_birch + (a1+a2*HL_birch+a3*age+a4*HL_birch*age+a5*HL_birch**2*age);
           
           #Wrap up
-          SIcalc <- rep(NA,lenght(age))
+          SIcalc <- rep(NA,length(age))
           SIcalc[Species==1] <- SIspruce[Species==1]
           SIcalc[Species==2] <- SIpine[Species==2]
           SIcalc[Species==3] <- NA
@@ -84,7 +84,7 @@ siteindex <- function(age,HL,SP,method="TVEITE-BRAASTAD"){
           H_pi_new= h1 + 1.3;
           
           #Wrap up
-          SIcalc <- rep(NA,lenght(age))
+          SIcalc <- rep(NA,length(age))
           SIcalc[Species==1] <- H_sp_new[Species==1]
           SIcalc[Species==2] <- H_pi_new[Species==2]
           SIcalc[Species==3] <- NA
