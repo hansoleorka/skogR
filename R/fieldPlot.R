@@ -11,6 +11,7 @@
 #' @param plot_radius numerical; the plot radius in m. 
 #' @param outside_plot logical vector; indicating if a tree is outside the plot. Optional. 
 #' Trees outside the plot will only be used to calculate the correction factor.
+#' @param separate_sampletrees logical; Determines if sample trees are only used for 
 #' 
 #' @return a data frame with the following columns:
 #' 
@@ -24,7 +25,7 @@
 
 
 
-fieldPlot<-function(plotid,d,sp,h,correction=FALSE,rel_factor=NA,plot_radius=NA,outside_plot=NA){
+fieldPlot<-function(plotid,d,sp,h,correction=FALSE,rel_factor=NA,plot_radius=NA,outside_plot=NA,separate_sampletrees=FALSE){
 
 	
 if (length(outside_plot) == 1) outside_plot<-rep(FALSE,length(plotid))
@@ -41,8 +42,8 @@ if (correction) if (is.na(rel_factor[1]) | is.na(plot_radius[1])) stop ('radius 
 if (correction) if (any(outside_plot)) warning ('correction=TRUE and trees outside_plot')
 
 
-
-klaving<-data.frame(plotid=plotid,d=d,sp=sp,h=h,outside_plot=outside_plot,rel_factor=rel_factor,radius=plot_radius)
+prtre<-!is.na(h)
+klaving<-data.frame(plotid=plotid,d=d,sp=sp,h=h,outside_plot=outside_plot,rel_factor=rel_factor,radius=plot_radius,prtre=prtre)
 
 # grunnflate alle trær
 klaving$grfl<-((klaving$d/100)*(klaving$d/100) )*(pi/4) # m2
@@ -112,6 +113,8 @@ klaving$h_est[!is.na(klaving$h)]<-klaving$h[!is.na(klaving$h)]
 klaving<-klaving[!klaving$outside_plot,]
 
 
+# ikke prøvetrær hvis dette er angitt (bare bruk til korr. faktor)
+if (separate_sampletrees) klaving<-klaving[!klaving$prtre,]
 
 
 # beregne flatevariabler

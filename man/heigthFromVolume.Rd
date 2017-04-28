@@ -7,7 +7,7 @@
 heigthFromVolume(vol, d, sp, interval = c(2, 60))
 }
 \arguments{
-\item{vol}{numerical vector; single tree volume.}
+\item{vol}{numerical vector; single tree volume. dm3.}
 
 \item{d}{numerical vector; diameters in cm.}
 

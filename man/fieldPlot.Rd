@@ -5,7 +5,7 @@
 \title{fieldPlot}
 \usage{
 fieldPlot(plotid, d, sp, h, correction = FALSE, rel_factor = NA,
-  plot_radius = NA, outside_plot = NA)
+  plot_radius = NA, outside_plot = NA, separate_sampletrees = FALSE)
 }
 \arguments{
 \item{plotid}{vector giving the plotid for each tree}
@@ -20,10 +20,12 @@ fieldPlot(plotid, d, sp, h, correction = FALSE, rel_factor = NA,
 
 \item{rel_factor}{numerical; if correction is TRUE a relascope factor must be given.}
 
-\item{plot_radius}{numerical; if correction is TRUE a plot radius must be given.}
+\item{plot_radius}{numerical; the plot radius in m.}
 
 \item{outside_plot}{logical vector; indicating if a tree is outside the plot. Optional.
 Trees outside the plot will only be used to calculate the correction factor.}
+
+\item{separate_sampletrees}{logical; Determines if sample trees are only used for}
 }
 \value{
 a data frame with the following columns:

@@ -2,7 +2,7 @@
 #' 
 #' Calculate estimated heights by reversing the single-tree volume functions.
 #'
-#' @param vol numerical vector; single tree volume.
+#' @param vol numerical vector; single tree volume. dm3.
 #' @param d numerical vector; diameters in cm.
 #' @param sp numerical vector; species.
 #' @param interval bounds of the possible height values. Used in the optimization function.
