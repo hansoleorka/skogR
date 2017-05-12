@@ -8,7 +8,7 @@
 #' @param components String vector specifying which biomass components to return:
 #' 
 #'  \itemize{
-#'  \item \bold{sb}  20 mm Biomass of stem bark
+#'  \item \bold{sb}  Biomass of stem bark
 #'  \item \bold{sw}  Stem wood biomass
 #'  \item \bold{st}  Total stem biomass (sw+sb)
 #'  \item \bold{fl}  Foliage biomass

@@ -10,10 +10,20 @@
 #' @param rel_factor numerical; if correction is TRUE a relascope factor must be given.
 #' @param plot_radius numerical; the plot radius in m. 
 #' @param outside_plot logical vector; indicating if a tree is outside the plot. Optional. 
+#' @param biomass_components character vector; calculate plotwise biomass for the given components. See help 
+#' in function biomassTree. 
 #' Trees outside the plot will only be used to calculate the correction factor.
 #' @param separate_sampletrees logical; Determines if sample trees are only used for 
+#' @param corf_method numeric; Method to use if there are missing sample trees for one or more species on a sample plot:
+#' (1) Convert the correction factor from one of the other species on the plot, using the corFactor function. In this alternative no data 
+#' from other plots are used.
+#' (2) Use the mean correction factor for the species for all plots. 
+#' @param  min_samtr numeric; Minimum number of sample trees allowed for each species in one plot. If the number of sample trees for one species 
+#' is below this number then the mean correction factor for all plots are used instead of the local correction factor.
+#' @param output_heights logical; Estimated heights are returned for all trees. 
 #' 
 #' @return a data frame with the following columns:
+#' if output_heights is TRUE: a list with two items, a data.frame with plotwise results, and a data.frame with the heights for all trees in the dataset.
 #' 
 #'
 #' @references Eid, T., Fitje, A., and Hoen, H.F. (2002) Økonomi og planlegging. Gan Forlag, Oslo. 205 s.
@@ -25,7 +35,16 @@
 
 
 
-fieldPlot<-function(plotid,d,sp,h,correction=FALSE,rel_factor=NA,plot_radius=NA,outside_plot=NA,separate_sampletrees=FALSE){
+fieldPlot<-function(plotid,d,sp,h,
+		correction=FALSE,
+		rel_factor=NA,
+		plot_radius=NA,
+		outside_plot=NA,
+		biomass_components=NA,
+		separate_sampletrees=FALSE,
+		corf_method=1,
+		min_samtr=3,
+		output_heights=FALSE){
 
 	
 if (length(outside_plot) == 1) outside_plot<-rep(FALSE,length(plotid))
@@ -35,6 +54,10 @@ if (is.na(plot_radius[1])) plot_radius<-rep(NA,length(plotid))
 if (length(rel_factor) == 1) rel_factor<-rep(rel_factor,length(plotid))
 if (length(plot_radius) == 1) plot_radius<-rep(plot_radius,length(plotid))
 
+if (biomass_components == 'all') {
+	biomass_components <- c('sb','sw','st','fl','cr','br','db','su','rf','rc','rs','sr','ab')
+	bmvars<-paste0('BM_',c(biomass_components,paste0(biomass_components,'_s'),paste0(biomass_components,'_p'),paste0(biomass_components,'_d')))
+}
 
 # check consistency / give warnings
 if ( length(unique(c(length(plotid),length(d),length(sp),length(h),length(outside_plot)) )) >1 )stop ('all input vectors must be of equal length.')
@@ -71,30 +94,59 @@ klaving$kf<-klaving$vol/klaving$basisvol
 
 
 # sett korreksjonsfaktor for volum flatevis
-for (i in unique(klaving$plotid)) {
+if (corf_method == 1){
+	for (i in unique(klaving$plotid)) {
+		
+		kf1<-kf2<-kf3<-NA
+		
+		kf1<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 1],klaving$weight[klaving$plotid == i & klaving$sp == 1],na.rm=TRUE)
+		kf2<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 2],klaving$weight[klaving$plotid == i & klaving$sp == 2],na.rm=TRUE)
+		kf3<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 3],klaving$weight[klaving$plotid == i & klaving$sp == 3],na.rm=TRUE)
+		
+		# hvis det mangler prøvetre av et treslag, konverter fra kor.faktor fra et av de andre treslagene
+		if (is.na(kf1))kf1<-corFactor(sp=2,cf=kf2)[1]
+		if (is.na(kf1))kf1<-corFactor(sp=3,cf=kf3)[1]
+		
+		if (is.na(kf2))kf2<-corFactor(sp=1,cf=kf1)[2]
+		if (is.na(kf2))kf2<-corFactor(sp=3,cf=kf3)[2]
+		
+		if (is.na(kf3))kf3<-corFactor(sp=1,cf=kf1)[3]
+		if (is.na(kf3))kf3<-corFactor(sp=2,cf=kf2)[3]
+		
+		klaving$kf[klaving$plotid == i & klaving$sp == 1]<-kf1
+		klaving$kf[klaving$plotid == i & klaving$sp == 2]<-kf2
+		klaving$kf[klaving$plotid == i & klaving$sp == 3]<-kf3
+		
+	}
+} else if (corf_method == 2){
 	
-	kf1<-kf2<-kf3<-NA
 	
-	kf1<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 1],klaving$weight[klaving$plotid == i & klaving$sp == 1],na.rm=TRUE)
-	kf2<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 2],klaving$weight[klaving$plotid == i & klaving$sp == 2],na.rm=TRUE)
-	kf3<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 3],klaving$weight[klaving$plotid == i & klaving$sp == 3],na.rm=TRUE)
+# sett korreksjonsfaktor for volum metode 2 (se hjelp)
+	for (i in unique(klaving$plotid)) {
+		for (j in unique(klaving$sp)) {
+			
+			klaving$kf[klaving$plotid == i & klaving$sp == j & is.na(klaving$kf)]<-
+					weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == j],
+							klaving$weight[klaving$plotid == i & klaving$sp == j],na.rm=TRUE)
+			
+			klaving$kf[klaving$plotid == i & 
+							klaving$sp == j & 
+							is.na(klaving$h) & 
+							nrow(klaving[klaving$plotid == i & klaving$sp == j & !is.na(klaving$h),]) < min_samtr]<-NA # hvis mindre enn X prøvetær
+		}
+	}
 	
-	# hvis det mangler prøvetre av et treslag, konverter fra kor.faktor fra et av de andre treslagene
-	if (is.na(kf1))kf1<-corFactor(sp=2,cf=kf2)[1]
-	if (is.na(kf1))kf1<-corFactor(sp=3,cf=kf3)[1]
 	
-	if (is.na(kf2))kf2<-corFactor(sp=1,cf=kf1)[2]
-	if (is.na(kf2))kf2<-corFactor(sp=3,cf=kf3)[2]
 	
-	if (is.na(kf3))kf3<-corFactor(sp=1,cf=kf1)[3]
-	if (is.na(kf3))kf3<-corFactor(sp=2,cf=kf2)[3]
-	
-	klaving$kf[klaving$plotid == i & klaving$sp == 1]<-kf1
-	klaving$kf[klaving$plotid == i & klaving$sp == 2]<-kf2
-	klaving$kf[klaving$plotid == i & klaving$sp == 3]<-kf3
-	
-}
-
+# global korreksjonsfaktor for de med mindre enn X trær av et treslag på flata
+	for (i in unique(klaving$sp) ) {
+		
+		klaving$kf[is.na(klaving$kf) & klaving$sp == i]<-weighted.mean(klaving$kf[klaving$sp == i],
+				klaving$weight[klaving$sp == i],
+				na.rm=TRUE)	
+		
+	}
+} # end corf_method == 2
 
 
 # volum alle trær (prøvetrær beholder tidligere beregnet volum)
@@ -103,11 +155,14 @@ klaving$vol[is.na(klaving$vol)]<-klaving$basisvol[is.na(klaving$vol)]*klaving$kf
 
 
 # beregnede høyder alle trær - baklengs i volumfunksjoner
-klaving$h_est<-heigthFromVolume(klaving$vol,klaving$d,klaving$sp)
+klaving$h_est<-heightFromVolume(klaving$vol,klaving$d,klaving$sp)
 
 
 # setter inn feltmålt høyde for prøvetrær
 klaving$h_est[!is.na(klaving$h)]<-klaving$h[!is.na(klaving$h)]
+
+# hvis estimerte høyder skal returneres
+if (output_heights) outh<-subset(klaving,select=c(plotid,d,h))
 
 # ikke trær utenfor flatene (bare i beregning av korreksjonsfaktor over)
 klaving<-klaving[!klaving$outside_plot,]
@@ -117,8 +172,13 @@ klaving<-klaving[!klaving$outside_plot,]
 if (separate_sampletrees) klaving<-klaving[!klaving$prtre,]
 
 
-# beregne flatevariabler
+# beregne biomasse hvis dette er oppgitt
+if (!is.na(biomass_components)) klaving<-cbind(klaving,biomassTree(klaving$d,klaving$h,klaving$sp,biomass_components))	
+
+
+# beregne per flate
 resvars<-c('plotID','plotSIZE','G_s','G_p','G_d','G_tot','V_s','V_p','V_d','V_tot','N_s','N_p','N_d','N_tot','H_lor','H_dom')
+if (!is.na(biomass_components)) resvars<-c(resvars,bmvars)
 restab<-data.frame(matrix(nrow=length(unique(klaving$plotid)),ncol=length(resvars)))
 colnames(restab)<-resvars
 for (i in 1:nrow(restab)) {
@@ -160,10 +220,33 @@ for (i in 1:nrow(restab)) {
  restab$H_dom[i]<-domHeight(a$h_est,a$d,area) 
 	
   
+# biomasse (tonn/ha)
+if (!is.na(biomass_components)) {
+	spl1<-c('a','g','f','l')
+	spl2<-c('','_s','_p','_d')
+	for (j in biomass_components){
+		for (k in 1:4) eval(parse(text=paste0('restab$BM_',j,spl2[k],'[i]<-(sum(',spl1[k],'$',j,'/1000)/area) * 10000') )) 
+	}	
+}
+	
+ 
+	
+	
  
 }
 
-return (restab)
+if (!output_heights) {
+
+	return (restab)
+	
+} else {
+	
+	return (list(results=restab,heigths=outh))
+	
+	
+}
+
+
 
 } # end fieldPlot function
 

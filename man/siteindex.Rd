@@ -4,14 +4,16 @@
 \alias{siteindex}
 \title{Site index}
 \usage{
-siteindex(age, HL, SP)
+siteindex(age, HO, SP, method = "TVEITE-BRAASTAD")
 }
 \arguments{
-\item{age}{age in breast height}
+\item{age}{age in breast height (years)}
 
-\item{HL}{Lorey's mean height}
+\item{HO}{Top height (Mean of the 100 largest trees with respect to dbh per hectar (meters))}
 
 \item{SP}{species code (1=spruce, 2= pine, 3= brich)}
+
+\item{method}{The functions to be used default or "SHARMA-BRUNNER"}
 
 \item{Vestlandet}{character for using functions representative for western-Norway either "coast" or "interior"}
 }
@@ -26,5 +28,10 @@ Compute site index curves
 }
 \author{
 Hans Ole Ørka \email{hans.ole.orka@gmail.org}
+}
+\references{
+Tveite, B. (1977). Site index curves for Norway spruce (Picea abies (L.) Karst.) (Norwegian with English summary). Report of the Norwegian Forest Research Institute, 33, 1–84.,
+Braastad, H. (1980). Tilvekstmodellprogram for furu: Growth model computer program for Pinus sylvestris. Meddelelser Fra Norsk Institutt for Skogforskning. Retrieved from http://agris.fao.org/agris-search/search.do?recordID=NO19810598295,
+Sharma, R. P., Brunner, A., Eid, T., & Øyen, B.-H. (2011). Modelling dominant height growth from national forest inventory individual tree data with short time series and large age errors. Forest Ecology and Management, 262(12), 2162–2175.
 }
 

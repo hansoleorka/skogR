@@ -5,7 +5,9 @@
 \title{fieldPlot}
 \usage{
 fieldPlot(plotid, d, sp, h, correction = FALSE, rel_factor = NA,
-  plot_radius = NA, outside_plot = NA, separate_sampletrees = FALSE)
+  plot_radius = NA, outside_plot = NA, biomass_components = NA,
+  separate_sampletrees = FALSE, corf_method = 1, min_samtr = 3,
+  output_heights = FALSE)
 }
 \arguments{
 \item{plotid}{vector giving the plotid for each tree}
@@ -22,13 +24,27 @@ fieldPlot(plotid, d, sp, h, correction = FALSE, rel_factor = NA,
 
 \item{plot_radius}{numerical; the plot radius in m.}
 
-\item{outside_plot}{logical vector; indicating if a tree is outside the plot. Optional.
+\item{outside_plot}{logical vector; indicating if a tree is outside the plot. Optional.}
+
+\item{biomass_components}{character vector; calculate plotwise biomass for the given components. See help
+in function biomassTree.
 Trees outside the plot will only be used to calculate the correction factor.}
 
 \item{separate_sampletrees}{logical; Determines if sample trees are only used for}
+
+\item{corf_method}{numeric; Method to use if there are missing sample trees for one or more species on a sample plot:
+(1) Convert the correction factor from one of the other species on the plot, using the corFactor function. In this alternative no data
+from other plots are used.
+(2) Use the mean correction factor for the species for all plots.}
+
+\item{min_samtr}{numeric; Minimum number of sample trees allowed for each species in one plot. If the number of sample trees for one species
+is below this number then the mean correction factor for all plots are used instead of the local correction factor.}
+
+\item{output_heights}{logical; Estimated heights are returned for all trees.}
 }
 \value{
 a data frame with the following columns:
+if output_heights is TRUE: a list with two items, a data.frame with plotwise results, and a data.frame with the heights for all trees in the dataset.
 }
 \description{
 Calculates volume, basal area, stem number and mean and dominant height on field plots

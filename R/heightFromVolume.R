@@ -1,4 +1,4 @@
-#' heigthFromVolume
+#' heightFromVolume
 #' 
 #' Calculate estimated heights by reversing the single-tree volume functions.
 #'
@@ -14,7 +14,7 @@
 #' @export
 
 
-heigthFromVolume<-function(vol,d,sp,interval=c(2,60)){
+heightFromVolume<-function(vol,d,sp,interval=c(2,60)){
 	
 	esth<-rep(NA,length(vol))
 
