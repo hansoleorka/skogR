@@ -54,7 +54,7 @@ if (is.na(plot_radius[1])) plot_radius<-rep(NA,length(plotid))
 if (length(rel_factor) == 1) rel_factor<-rep(rel_factor,length(plotid))
 if (length(plot_radius) == 1) plot_radius<-rep(plot_radius,length(plotid))
 
-if (biomass_components == 'all') {
+if (!is.na(biomass_components[1])) if (biomass_components == 'all') {
 	biomass_components <- c('sb','sw','st','fl','cr','br','db','su','rf','rc','rs','sr','ab')
 	bmvars<-paste0('BM_',c(biomass_components,paste0(biomass_components,'_s'),paste0(biomass_components,'_p'),paste0(biomass_components,'_d')))
 }
@@ -162,7 +162,7 @@ klaving$h_est<-heightFromVolume(klaving$vol,klaving$d,klaving$sp)
 klaving$h_est[!is.na(klaving$h)]<-klaving$h[!is.na(klaving$h)]
 
 # hvis estimerte høyder skal returneres
-if (output_heights) outh<-subset(klaving,select=c(plotid,d,h))
+if (output_heights) outh<-subset(klaving,select=c(plotid,d,h_est))
 
 # ikke trær utenfor flatene (bare i beregning av korreksjonsfaktor over)
 klaving<-klaving[!klaving$outside_plot,]
@@ -173,12 +173,12 @@ if (separate_sampletrees) klaving<-klaving[!klaving$prtre,]
 
 
 # beregne biomasse hvis dette er oppgitt
-if (!is.na(biomass_components)) klaving<-cbind(klaving,biomassTree(klaving$d,klaving$h,klaving$sp,biomass_components))	
+if (!is.na(biomass_components[1])) klaving<-cbind(klaving,biomassTree(klaving$d,klaving$h,klaving$sp,biomass_components))	
 
 
 # beregne per flate
 resvars<-c('plotID','plotSIZE','G_s','G_p','G_d','G_tot','V_s','V_p','V_d','V_tot','N_s','N_p','N_d','N_tot','H_lor','H_dom')
-if (!is.na(biomass_components)) resvars<-c(resvars,bmvars)
+if (!is.na(biomass_components[1])) resvars<-c(resvars,bmvars)
 restab<-data.frame(matrix(nrow=length(unique(klaving$plotid)),ncol=length(resvars)))
 colnames(restab)<-resvars
 for (i in 1:nrow(restab)) {
@@ -221,7 +221,7 @@ for (i in 1:nrow(restab)) {
 	
   
 # biomasse (tonn/ha)
-if (!is.na(biomass_components)) {
+if (!is.na(biomass_components[1])) {
 	spl1<-c('a','g','f','l')
 	spl2<-c('','_s','_p','_d')
 	for (j in biomass_components){
@@ -241,7 +241,7 @@ if (!output_heights) {
 	
 } else {
 	
-	return (list(results=restab,heigths=outh))
+	return (list(results=restab,heights=outh))
 	
 	
 }
