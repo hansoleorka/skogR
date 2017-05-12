@@ -75,28 +75,28 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 # Norway spruce	
 	if (includeheights){
 		
-		if (cr) cr_1<- dhfun(13,10.9708,-0.0124,-0.4923,-1.2063)
+		if (cr | ab | br) cr_1<- dhfun(13,10.9708,-0.0124,-0.4923,-1.2063)
 		if (db) db_1<- dhfun(18,3.6518,0.0493,1.0129,-4.6351) 
 		if (sw) sw_1<- dhfun(14,7.2309,0.0355,0.7030,-2.3032)  
-		if (fl) fl_1<-dhfun(12,9.7809,0,-0.4873,-1.8551)
+		if (fl  | br) fl_1<-dhfun(12,9.7809,0,-0.4873,-1.8551)
 		if (sb) sb_1<-dhfun(15,8.3089,0.0147,0.2295,-3.4020)
 		if (sr) sr_1<-dfun(14,10.5381,-2.4447) # Not h
 		if (su) su_1<-dfun(17,10.6686,-3.3645)# Not h
-		if (rc) rc_1<-dfun(8,13.3703,-6.3851) # Not h
-		if (rf) rf_1<-dfun(12,7.6283,-2.5706) # Not h
-		if (st) st_1<-dhfun(14,7.4690,0.0289,0.6828,-2.1702)
+		if (rc | rs) rc_1<-dfun(8,13.3703,-6.3851) # Not h
+		if (rf | rs) rf_1<-dfun(12,7.6283,-2.5706) # Not h
+		if (st | ab) st_1<-dhfun(14,7.4690,0.0289,0.6828,-2.1702)
 	} else {
 		
 		if (db) db_1<- dfun(18,9.9550,-4.3308) 
 		if (sw) sw_1<- dfun(14,11.4873,-2.2471)  
-		if (cr) cr_1<- dfun(13,8.5242,-1.2804)
-		if (fl) fl_1<-dfun(12,7.8171,-1.9602)
+		if (cr | ab | br) cr_1<- dfun(13,8.5242,-1.2804)
+		if (fl | br) fl_1<-dfun(12,7.8171,-1.9602)
 		if (sb) sb_1<-dfun(15,9.8364,-3.3912)
 		if (sr) sr_1<-dfun(14,10.5381,-2.4447)
 		if (su) su_1<-dfun(17,10.6686,-3.3645)
-		if (rc) rc_1<-dfun(8,13.3703,-6.3851)
-		if (rf) rf_1<-dfun(12,7.6283,-2.5706)
-		if (st) st_1<-dfun(14,11.3341,-2.0571)
+		if (rc | rs) rc_1<-dfun(8,13.3703,-6.3851)
+		if (rf | rs) rf_1<-dfun(12,7.6283,-2.5706)
+		if (st | ab) st_1<-dfun(14,11.3341,-2.0571)
 
 	}
 	
@@ -105,62 +105,62 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 # Scots pine	
 	if (includeheights){
 		
-		if (cr) cr_2<- dhfun(10,13.3955,0,-1.1955,-2.5413)
+		if (cr | ab | br) cr_2<- dhfun(10,13.3955,0,-1.1955,-2.5413)
 		if (db) db_2<- dhfun(10,7.1270,-0.0465,1.1060,-5.8926) 
 		if (sw) sw_2<- dhfun(14,7,6066,0.0200,0.8658,-2.6864)  
-		if (fl) fl_2<-dhfun(7,12.1095,0.0413,-1.5650,-3.4781)
+		if (fl | br) fl_2<-dhfun(7,12.1095,0.0413,-1.5650,-3.4781)
 		if (sb) sb_2<-dhfun(14,7.6066,0.0200,0.8658,-2.6864)
-		if (st) st_2<-dhfun(13,7.5939,0.0151,0.8799,-2.6768)
+		if (st | ab) st_2<-dhfun(13,7.5939,0.0151,0.8799,-2.6768)
 		if (sr) sr_2<-dfun(12,11.1106,-3.3913) # Not h
 		if (su) su_2<-dfun(15,11.0481,-3.9657) # Not h
-		if (rc) rc_2<-dfun(9,13.2902,-6.3413) # Not h
-		if (rf) rf_2<-dfun(10,8.8795,-3.8375) # Not h
+		if (rc | rs) rc_2<-dfun(9,13.2902,-6.3413) # Not h
+		if (rf | rs) rf_2<-dfun(10,8.8795,-3.8375) # Not h
 		
 	} else {
 		
-		if (cr) cr_2<- dfun(10,9.1015,-2.8604)
+		if (cr | ab | br) cr_2<- dfun(10,9.1015,-2.8604)
 		if (sw) sw_2<-dfun(14,11.4219,-2.2184)
 		
 		if (db) db_2<- dfun(10,9.5938,-5.3338) 
-		if (fl) fl_2<-dfun(7,7.77681,-3.7983)
+		if (fl | br) fl_2<-dfun(7,7.77681,-3.7983)
 		if (sb) sb_2<-dfun(16,8.8489,-2.9748)
 		if (sr) sr_2<-dfun(12,11.1106,-3.3913)
 		if (su) su_2<-dfun(15,11.0481,-3.9657)
-		if (rc) rc_2<-dfun(9,13.2902,-6.3413)
-		if (rf) rf_2<-dfun(10,8.8795,-3.8375)
-		if (st) st_2<-dfun(13,11.3264,-2.3388)
+		if (rc | rs) rc_2<-dfun(9,13.2902,-6.3413)
+		if (rf | rs) rf_2<-dfun(10,8.8795,-3.8375)
+		if (st | ab) st_2<-dfun(13,11.3264,-2.3388)
 	}
 	
 	
 # Birch	
 	if (includeheights){
 		
-		if (cr) cr_3<- dfun(10,10.2806,-3.3633) # Not h	
+		if (cr | ab | br) cr_3<- dfun(10,10.2806,-3.3633) # Not h	
 		if (sw) sw_3<- dhfun(11,8.1184,0,0.9783,-3.3045) 
 		if (db) db_3<- dhfun(30,11.2872,-0.3081,2.6821,-6.6237) 
 		if (sb) sb_3<-dhfun(14,8.3019,0,0.7433,-4.0778)
-		if (st) st_3<-dhfun(7,8.2827,0.0393,0.5772,-3.5686)
+		if (st | ab) st_3<-dhfun(7,8.2827,0.0393,0.5772,-3.5686)
 
 		if (su) su_3<-rep(NA,length(d)) # Functions do not exist for these components
-		if (rc) rc_3<-rep(NA,length(d))
-		if (rf) rf_3<-rep(NA,length(d))
-		if (fl) fl_3<-rep(NA,length(d))
+		if (rc | rs) rc_3<-rep(NA,length(d))
+		if (rf | rs) rf_3<-rep(NA,length(d))
+		if (fl | br) fl_3<-rep(NA,length(d))
 		if (sr) sr_3<-rep(NA,length(d))
 		
 		
 		
 	} else {
 		
-		if (cr) cr_3<- dfun(10,10.2806,-3.3633)
+		if (cr | ab | br) cr_3<- dfun(10,10.2806,-3.3633)
 		if (sw) sw_3<- dfun(11,10.8109,-2.3327) 
 		if (db) db_3<- dfun(5,7.9266,-5.9507) 
 		if (sb) sb_3<-dfun(14,10.3876,-3.2518)
-		if (st) st_3<-dfun(8,11.0735,-3.0932)
+		if (st | ab) st_3<-dfun(8,11.0735,-3.0932)
 		
 		if (su) su_3<-rep(NA,length(d)) # Functions do not exist for these components
-		if (rc) rc_3<-rep(NA,length(d))
-		if (rf) rf_3<-rep(NA,length(d))
-		if (fl) fl_3<-rep(NA,length(d))
+		if (rc | rs) rc_3<-rep(NA,length(d))
+		if (rf | rs) rf_3<-rep(NA,length(d))
+		if (fl | br) fl_3<-rep(NA,length(d))
 		if (sr) sr_3<-rep(NA,length(d))
 	}
 	
