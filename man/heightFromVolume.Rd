@@ -4,7 +4,7 @@
 \alias{heightFromVolume}
 \title{heightFromVolume}
 \usage{
-heightFromVolume(vol, d, sp, interval = c(2, 60))
+heightFromVolume(vol, d, sp, interval = c(0, 45))
 }
 \arguments{
 \item{vol}{numerical vector; single tree volume. dm3.}
@@ -13,7 +13,7 @@ heightFromVolume(vol, d, sp, interval = c(2, 60))
 
 \item{sp}{numerical vector; species.}
 
-\item{interval}{bounds of the possible height values. Used in the optimization function.}
+\item{interval}{numeric vector; default lower/upper bound for optim}
 }
 \value{
 a vector of the same length as the input with estimated heights.
