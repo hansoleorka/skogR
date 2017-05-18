@@ -18,9 +18,9 @@
 corFactor<-function(sp,cf){
 	
 	spruce<-pine<-deciduous<-NA
-	if (sp == 1) pine<-0.5+0.49*cf; deciduous<-0.79+0.31*cf; spruce<-cf
-	if (sp == 2) spruce<-0.27+0.92*cf; deciduous<-0.46+0.59*cf; pine<-cf
-	if (sp == 3) spruce<-0.56+0.65*cf; pine<-0.48+0.52*cf; deciduous <- cf
+	if (sp == 1) { pine<-0.5+0.49*cf; deciduous<-0.79+0.31*cf; spruce<-cf }
+	if (sp == 2) { spruce<-0.27+0.92*cf; deciduous<-0.46+0.59*cf; pine<-cf }
+	if (sp == 3) { spruce<-0.56+0.65*cf; pine<-0.48+0.52*cf; deciduous <- cf }
 
 	return(c(spruce, pine, deciduous))
 }

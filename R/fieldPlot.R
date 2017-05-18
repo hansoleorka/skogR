@@ -93,7 +93,7 @@ if (correction){
 klaving$kf<-klaving$vol/klaving$basisvol
 
 
-# sett korreksjonsfaktor for volum flatevis
+# sett korreksjonsfaktor for volum flatevis (metode 1)
 if (corf_method == 1){
 	for (i in unique(klaving$plotid)) {
 		
@@ -102,6 +102,12 @@ if (corf_method == 1){
 		kf1<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 1],klaving$weight[klaving$plotid == i & klaving$sp == 1],na.rm=TRUE)
 		kf2<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 2],klaving$weight[klaving$plotid == i & klaving$sp == 2],na.rm=TRUE)
 		kf3<-weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == 3],klaving$weight[klaving$plotid == i & klaving$sp == 3],na.rm=TRUE)
+		
+		# setter til NA hvis det er for få prøvetrær av ett treslag
+		if (sum(!is.na(klaving$kf[klaving$plotid == i & klaving$sp == 1])) < min_samtr) kf1<-NA
+		if (sum(!is.na(klaving$kf[klaving$plotid == i & klaving$sp == 2])) < min_samtr) kf2<-NA
+		if (sum(!is.na(klaving$kf[klaving$plotid == i & klaving$sp == 3])) < min_samtr) kf3<-NA
+		
 		
 		# hvis det mangler prøvetre av et treslag, konverter fra kor.faktor fra et av de andre treslagene
 		if (is.na(kf1))kf1<-corFactor(sp=2,cf=kf2)[1]
@@ -162,7 +168,7 @@ klaving$h_est<-heightFromVolume(klaving$vol,klaving$d,klaving$sp)
 klaving$h_est[!is.na(klaving$h)]<-klaving$h[!is.na(klaving$h)]
 
 # hvis estimerte høyder skal returneres
-if (output_heights) outh<-subset(klaving,select=c(plotid,d,h_est))
+if (output_heights) outh<-subset(klaving,select=c(plotid,d,h_est,kf,vol))
 
 # ikke trær utenfor flatene (bare i beregning av korreksjonsfaktor over)
 klaving<-klaving[!klaving$outside_plot,]
