@@ -4,7 +4,7 @@
 \alias{heightFromVolume}
 \title{heightFromVolume}
 \usage{
-heightFromVolume(vol, d, sp, interval = c(0, 45))
+heightFromVolume(vol, d, sp, interval = c(0, 45), obj.threshold = NA)
 }
 \arguments{
 \item{vol}{numerical vector; single tree volume. dm3.}
@@ -14,6 +14,8 @@ heightFromVolume(vol, d, sp, interval = c(0, 45))
 \item{sp}{numerical vector; species.}
 
 \item{interval}{numeric vector; default lower/upper bound for optim}
+
+\item{obj.threshold}{numeric; the function will return NA if the objective value from the optimisation is larger than this value.}
 }
 \value{
 a vector of the same length as the input with estimated heights.

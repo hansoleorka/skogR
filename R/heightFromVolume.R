@@ -6,6 +6,7 @@
 #' @param d numerical vector; diameters in cm.
 #' @param sp numerical vector; species.
 #' @param interval numeric vector; default lower/upper bound for optim
+#' @param obj.threshold numeric; the function will return NA if the objective value from the optimisation is larger than this value.  
 
 #' @return a vector of the same length as the input with estimated heights.
 #'
@@ -14,10 +15,11 @@
 #' @export
 
 
-heightFromVolume<-function(vol,d,sp,interval=c(0,45)){
+heightFromVolume<-function(vol,d,sp,interval=c(0,45),obj.threshold=NA){
+	
 	
 	esth<-rep(NA,length(vol))
-
+	
 	for (i in 1:length(vol)){	
 		
 
@@ -58,10 +60,14 @@ heightFromVolume<-function(vol,d,sp,interval=c(0,45)){
 	esth_1<-optimize(minfun,interval=interval)$minimum
 	esth[i]<-optimize(minfun,interval=c(0,esth_1))$minimum
 	
+    
+	if (!is.na(obj.threshold)) {
+		obj<-optimize(minfun,interval=c(0,esth_1))$objective
+		if (obj > obj.threshold) esth[i]<- NA
+	}
 	}
 	
-	
-	return(esth)
+		return(esth)
 }
 
 

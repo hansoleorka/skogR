@@ -13,7 +13,7 @@
 #' @param biomass_components character vector; calculate plotwise biomass for the given components. See help 
 #' in function biomassTree. 
 #' Trees outside the plot will only be used to calculate the correction factor.
-#' @param separate_sampletrees logical; Determines if sample trees are only used for 
+#' @param separate_sampletrees logical; Determines if sample trees are only used for calculation of correction factor.
 #' @param corf_method numeric; Method to use if there are missing sample trees for one or more species on a sample plot:
 #' (1) Convert the correction factor from one of the other species on the plot, using the corFactor function. In this alternative no data 
 #' from other plots are used.
@@ -22,8 +22,9 @@
 #' is below this number then the mean correction factor for all plots are used instead of the local correction factor.
 #' @param output_heights logical; Estimated heights are returned for all trees. 
 #' 
-#' @return a data frame with the following columns:
-#' if output_heights is TRUE: a list with two items, a data.frame with plotwise results, and a data.frame with the heights for all trees in the dataset.
+#' @return a data frame.
+#' if output_heights is TRUE: a list with two items, a data.frame with plotwise results, and a data.frame with the 
+#' estimated heights for all trees in the dataset, in the same order as the input.
 #' 
 #'
 #' @references Eid, T., Fitje, A., and Hoen, H.F. (2002) Økonomi og planlegging. Gan Forlag, Oslo. 205 s.
@@ -35,14 +36,13 @@
 
 
 
-fieldPlot<-function(plotid,d,sp,h,
+fieldPlot<-function(plotid,d,sp,h, plot_radius,
 		correction=FALSE,
 		rel_factor=NA,
-		plot_radius=NA,
 		outside_plot=NA,
 		biomass_components=NA,
 		separate_sampletrees=FALSE,
-		corf_method=1,
+		corf_method=2,
 		min_samtr=3,
 		output_heights=FALSE){
 
@@ -93,8 +93,7 @@ if (correction){
 klaving$kf<-klaving$vol/klaving$basisvol
 
 
-# sett korreksjonsfaktor for volum flatevis (metode 1)
-if (corf_method == 1){
+# sett korreksjonsfaktor for volum ("tariff")
 	for (i in unique(klaving$plotid)) {
 		
 		kf1<-kf2<-kf3<-NA
@@ -108,67 +107,80 @@ if (corf_method == 1){
 		if (sum(!is.na(klaving$kf[klaving$plotid == i & klaving$sp == 2])) < min_samtr) kf2<-NA
 		if (sum(!is.na(klaving$kf[klaving$plotid == i & klaving$sp == 3])) < min_samtr) kf3<-NA
 		
-		
-		# hvis det mangler prøvetre av et treslag, konverter fra kor.faktor fra et av de andre treslagene
-		if (is.na(kf1))kf1<-corFactor(sp=2,cf=kf2)[1]
-		if (is.na(kf1))kf1<-corFactor(sp=3,cf=kf3)[1]
-		
-		if (is.na(kf2))kf2<-corFactor(sp=1,cf=kf1)[2]
-		if (is.na(kf2))kf2<-corFactor(sp=3,cf=kf3)[2]
-		
-		if (is.na(kf3))kf3<-corFactor(sp=1,cf=kf1)[3]
-		if (is.na(kf3))kf3<-corFactor(sp=2,cf=kf2)[3]
-		
 		klaving$kf[klaving$plotid == i & klaving$sp == 1]<-kf1
 		klaving$kf[klaving$plotid == i & klaving$sp == 2]<-kf2
 		klaving$kf[klaving$plotid == i & klaving$sp == 3]<-kf3
 		
 	}
-} else if (corf_method == 2){
+
 	
+
+		
+		# hvis det mangler prøvetre av et treslag kjør én av to metoder: 
+
+
+
+		if (corf_method == 1){ # metode 1 flatevis 
 	
-# sett korreksjonsfaktor for volum metode 2 (se hjelp)
-	for (i in unique(klaving$plotid)) {
-		for (j in unique(klaving$sp)) {
+			for (i in unique(klaving$plotid)) {
+						
+			# konverter fra kor.faktor fra et av de andre treslagene
+			if (is.na(kf1))kf1<-corFactor(sp=2,cf=kf2)[1]
+			if (is.na(kf1))kf1<-corFactor(sp=3,cf=kf3)[1]
 			
-			klaving$kf[klaving$plotid == i & klaving$sp == j & is.na(klaving$kf)]<-
-					weighted.mean(klaving$kf[klaving$plotid == i & klaving$sp == j],
-							klaving$weight[klaving$plotid == i & klaving$sp == j],na.rm=TRUE)
+			if (is.na(kf2))kf2<-corFactor(sp=1,cf=kf1)[2]
+			if (is.na(kf2))kf2<-corFactor(sp=3,cf=kf3)[2]
 			
-			klaving$kf[klaving$plotid == i & 
-							klaving$sp == j & 
-							is.na(klaving$h) & 
-							nrow(klaving[klaving$plotid == i & klaving$sp == j & !is.na(klaving$h),]) < min_samtr]<-NA # hvis mindre enn X prøvetær
+			if (is.na(kf3))kf3<-corFactor(sp=1,cf=kf1)[3]
+			if (is.na(kf3))kf3<-corFactor(sp=2,cf=kf2)[3]
+		
+			} 
+			
+		
+		} 
+		
+		
+		
+		if (corf_method == 2){ # metode 2 vha globale kf, bare prøvetrær
+		
+			kf1<-weighted.mean(klaving$kf[klaving$sp == 1 & klaving$prtre],klaving$weight[klaving$sp == 1 & klaving$prtre],na.rm=TRUE)	
+			kf2<-weighted.mean(klaving$kf[klaving$sp == 2 & klaving$prtre],klaving$weight[klaving$sp == 2 & klaving$prtre],na.rm=TRUE)	
+			kf3<-weighted.mean(klaving$kf[klaving$sp == 3 & klaving$prtre],klaving$weight[klaving$sp == 3 & klaving$prtre],na.rm=TRUE)	
+			
+			klaving$kf[is.na(klaving$kf) & klaving$sp == 1]<-kf1
+			klaving$kf[is.na(klaving$kf) & klaving$sp == 2]<-kf2
+			klaving$kf[is.na(klaving$kf) & klaving$sp == 3]<-kf3
+			
+			klaving$gl_kf1<-kf1
+			klaving$gl_kf2<-kf2
+			klaving$gl_kf3<-kf3
+			
 		}
-	}
-	
-	
-	
-# global korreksjonsfaktor for de med mindre enn X trær av et treslag på flata
-	for (i in unique(klaving$sp) ) {
 		
-		klaving$kf[is.na(klaving$kf) & klaving$sp == i]<-weighted.mean(klaving$kf[klaving$sp == i],
-				klaving$weight[klaving$sp == i],
-				na.rm=TRUE)	
 		
-	}
-} # end corf_method == 2
+	
 
 
+	
+	
 # volum alle trær (prøvetrær beholder tidligere beregnet volum)
 klaving$vol[is.na(klaving$vol)]<-klaving$basisvol[is.na(klaving$vol)]*klaving$kf[is.na(klaving$vol)]
 
 
 
 # beregnede høyder alle trær - baklengs i volumfunksjoner
-klaving$h_est<-heightFromVolume(klaving$vol,klaving$d,klaving$sp)
+klaving$h_est<-heightFromVolume(klaving$vol,klaving$d,klaving$sp,obj.threshold=0.03)
 
+# for volum utenfor funksjonen setter estimert høyde til basish*kf
+klaving$h_est[is.na(klaving$h_est)]<-klaving$basish[is.na(klaving$h_est)]*klaving$kf[is.na(klaving$h_est)]
 
 # setter inn feltmålt høyde for prøvetrær
 klaving$h_est[!is.na(klaving$h)]<-klaving$h[!is.na(klaving$h)]
 
-# hvis estimerte høyder skal returneres
-if (output_heights) outh<-subset(klaving,select=c(plotid,d,h_est,kf,vol))
+# hvis data på trenivå skal returneres
+# if (output_heights) outh<-subset(klaving,select=c(plotid,d,h_est,kf,vol,gl_kf1,gl_kf2,gl_kf3))
+if (output_heights) outh<-subset(klaving,select=c(plotid,d,h_est))
+
 
 # ikke trær utenfor flatene (bare i beregning av korreksjonsfaktor over)
 klaving<-klaving[!klaving$outside_plot,]

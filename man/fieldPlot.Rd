@@ -6,7 +6,7 @@
 \usage{
 fieldPlot(plotid, d, sp, h, correction = FALSE, rel_factor = NA,
   plot_radius = NA, outside_plot = NA, biomass_components = NA,
-  separate_sampletrees = FALSE, corf_method = 1, min_samtr = 3,
+  separate_sampletrees = FALSE, corf_method = 2, min_samtr = 3,
   output_heights = FALSE)
 }
 \arguments{
@@ -43,8 +43,9 @@ is below this number then the mean correction factor for all plots are used inst
 \item{output_heights}{logical; Estimated heights are returned for all trees.}
 }
 \value{
-a data frame with the following columns:
-if output_heights is TRUE: a list with two items, a data.frame with plotwise results, and a data.frame with the heights for all trees in the dataset.
+a data frame.
+if output_heights is TRUE: a list with two items, a data.frame with plotwise results, and a data.frame with the
+estimated heights for all trees in the dataset, in the same order as the input.
 }
 \description{
 Calculates volume, basal area, stem number and mean and dominant height on field plots
