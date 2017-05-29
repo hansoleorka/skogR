@@ -4,8 +4,8 @@
 \alias{fieldPlot}
 \title{fieldPlot}
 \usage{
-fieldPlot(plotid, d, sp, h, correction = FALSE, rel_factor = NA,
-  plot_radius = NA, outside_plot = NA, biomass_components = NA,
+fieldPlot(plotid, d, sp, h, plot_radius, correction = FALSE,
+  rel_factor = NA, outside_plot = NA, biomass_components = NA,
   separate_sampletrees = FALSE, corf_method = 2, min_samtr = 3,
   output_heights = FALSE)
 }
@@ -18,11 +18,11 @@ fieldPlot(plotid, d, sp, h, correction = FALSE, rel_factor = NA,
 
 \item{h}{numerical vector; heights in m.}
 
+\item{plot_radius}{numerical; the plot radius in m.}
+
 \item{correction}{logical; Should be TRUE if sample trees are selected with relascope but from only inside the plot.}
 
 \item{rel_factor}{numerical; if correction is TRUE a relascope factor must be given.}
-
-\item{plot_radius}{numerical; the plot radius in m.}
 
 \item{outside_plot}{logical vector; indicating if a tree is outside the plot. Optional.}
 
@@ -30,7 +30,7 @@ fieldPlot(plotid, d, sp, h, correction = FALSE, rel_factor = NA,
 in function biomassTree.
 Trees outside the plot will only be used to calculate the correction factor.}
 
-\item{separate_sampletrees}{logical; Determines if sample trees are only used for}
+\item{separate_sampletrees}{logical; Determines if sample trees are only used for calculation of correction factor.}
 
 \item{corf_method}{numeric; Method to use if there are missing sample trees for one or more species on a sample plot:
 (1) Convert the correction factor from one of the other species on the plot, using the corFactor function. In this alternative no data
