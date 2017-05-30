@@ -22,8 +22,7 @@
 #'  \item \bold{sr}  Biomass of stump-root system *
 #'  \item \bold{ab}  Total aboveground biomass (st + cr + su + db)
 #'  \item \bold{bg}  Total belowground biomass (Petterson & Ståhl 2006)
-#'  \item \bold{tb}  Total tree biomass (ab + rs)
-
+#'  \item \bold{tb}  Total tree biomass (st + cr + db + bg)
 #' 
 #' 
 #'  \item \bold{all}  All the above components
@@ -82,7 +81,7 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 		
 		# spruce
 		cr_1<- dhfun(13,10.9708,-0.0124,-0.4923,-1.2063)
-		idb_1<- dhfun(18,3.6518,0.0493,1.0129,-4.6351) 
+		db_1<- dhfun(18,3.6518,0.0493,1.0129,-4.6351) 
 		sw_1<- dhfun(14,7.2309,0.0355,0.7030,-2.3032)  
 		fl_1<-dhfun(12,9.7809,0,-0.4873,-1.8551)
 		sb_1<-dhfun(15,8.3089,0.0147,0.2295,-3.4020)
@@ -169,9 +168,9 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 	ab_2<-sw_2+sb_2+cr_2+su_2+db_2
 	ab_3<-sw_3+sb_3+cr_3+su_3+db_3
 	
-	tb_1<-ab_1+rs_1
-	tb_2<-ab_2+rs_2
-	tb_3<-ab_3+rs_3
+	tb_1<-sw_1+sb_1+cr_1+db_1+bg_1 
+	tb_2<-sw_2+sb_2+cr_2+db_2+bg_2
+	tb_3<-sw_3+sb_3+cr_3+db_3+bg_3
 	
 	
 	# Subset according to species

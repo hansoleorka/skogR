@@ -55,7 +55,7 @@ if (length(rel_factor) == 1) rel_factor<-rep(rel_factor,length(plotid))
 if (length(plot_radius) == 1) plot_radius<-rep(plot_radius,length(plotid))
 
 if (!is.na(biomass_components[1]))  {
-	if (biomass_components[1] == 'all') biomass_components <- c('sb','sw','st','fl','cr','br','db','su','rf','rc','rs','sr','ab')
+	biomass_components <- names(biomassTree( d=c(10,10),h=c(10,10),sp=c(1,2),components=biomass_components ))
 	bmvars<-paste0('BM_',c(biomass_components,paste0(biomass_components,'_s'),paste0(biomass_components,'_p'),paste0(biomass_components,'_d')))
 }
 
