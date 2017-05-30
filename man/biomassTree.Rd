@@ -28,7 +28,10 @@ biomassTree(d, h = NA, sp, components = c("all"))
  \item \bold{rc}  Biomass of coarse roots *
  \item \bold{rs}  Biomass of roots (rc+rf) *
  \item \bold{sr}  Biomass of stump-root system *
- \item \bold{ab}  Total aboveground biomass (st+cr)
+ \item \bold{ab}  Total aboveground biomass (st + cr + su + db)
+ \item \bold{bg}  Total belowground biomass (Petterson & Ståhl 2006)
+ \item \bold{tb}  Total tree biomass (ab + rs)
+
 
  \item \bold{all}  All the above components
     }}
@@ -55,10 +58,13 @@ available function, thus the value from this is returned,
 \emph{even if height values are provided.}
 }
 \author{
-Marius Hauglin (2013) \email{marius.hauglin@nmbu.no}
+Marius Hauglin (2013-2017) \email{marius.hauglin@nmbu.no}
 }
 \references{
 Marklund, L.G., 1988. Biomass functions for pine,
 spruce and birch in Sweden (Report No. 45). Swedish University of Agricultural Sciences, Umeå.
+
+Petersson, H. & Ståhl, G. 2006. Functions for below-ground biomass of Pinus sylvestris, Picea abies, Betula pendula and Betula pubescens in Sweden.
+Scandinavian Journal of Forest Research 21(Suppl 7): 84-93
 }
 
