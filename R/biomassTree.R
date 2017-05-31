@@ -159,7 +159,7 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 		eval( parse(text=paste0('bg_',i,'<-bg_',i,'-su_',i)) )
 		eval( parse(text=paste0('br_',i,'<-cr_',i,'-fl_',i)) )
 		eval( parse(text=paste0('rs_',i,'<-rc_',i,'+rf_',i)) )
-		eval( parse(text=paste0('ab_',i,'<-sw_',i,'+sb_',i,'+cr_',i,'+db_',i)) )
+		eval( parse(text=paste0('ab_',i,'<-sw_',i,'+sb_',i,'+cr_',i,'+db_',i,'+su_',i)) )
 		eval( parse(text=paste0('tb_',i,'<-ab_',i,'+bg_',i)) )
 	}
 	
