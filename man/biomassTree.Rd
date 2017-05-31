@@ -19,17 +19,17 @@ biomassTree(d, h = NA, sp, components = c("all"))
  \item \bold{sb}  Biomass of stem bark
  \item \bold{sw}  Stem wood biomass
  \item \bold{st}  Total stem biomass (sw+sb)
- \item \bold{fl}  Foliage biomass ¤
+ \item \bold{fl}  Foliage biomass
  \item \bold{cr}  Crown biomass
  \item \bold{br}  Branch biomass (cr-fl)
  \item \bold{db}  Biomass of dead branches
- \item \bold{su}  Stump biomass * §
- \item \bold{rf}  Biomass of fine roots *  ¤
- \item \bold{rc}  Biomass of coarse roots * ¤
- \item \bold{rs}  Biomass of roots (rc+rf) *
- \item \bold{sr}  Biomass of stump-root system * §
+ \item \bold{su}  Stump biomass
+ \item \bold{rf}  Biomass of fine roots
+ \item \bold{rc}  Biomass of coarse roots
+ \item \bold{rs}  Biomass of roots (rc+rf)
+ \item \bold{sr}  Biomass of stump-root system
  \item \bold{ab}  Total aboveground biomass (st + cr + su + db)
- \item \bold{bg}  Total belowground biomass (using Petterson & Ståhl 2006) * **
+ \item \bold{bg}  Total belowground biomass (using Petterson & Ståhl 2006)
  \item \bold{tb}  Total tree biomass (ab + bg)
 
 
@@ -43,14 +43,11 @@ A data frame with the dry weight biomass (kg) for the specified components. Colu
 Single-tree biomass functions for spruce, pine and birch.
 }
 \note{
-\code{h} is optional. Marklund include functions with diameter alone, and with diameter
-and height as explanatory variables for most biomass components.
-Note that for some components only functions with
-diameter as a single explanatory variable are available (marked with * in the list above).
-** according to FAO the stump is included in the above-ground biomass. \bold{su} is subtracted from the below-ground biomass
-calculated using Petterson & Ståhl's function, since this initially includes the stump.
-§ \bold{su} and \bold{sr} are for birch calculated using the function for pine.
-¤ \bold{fl}, \bold{rf} and \bold{rc} are for birch calculated as \bold{sw}*f, where f is a factor derived from ??
+\code{h} is optional. Functions with diameter as the only expl. variable will be used if h is not given. \cr\cr
+According to FAO the stump is included in the above-ground biomass. \bold{su} is subtracted from the below-ground biomass
+calculated using Petterson & Ståhl's function, since this initially includes the stump. \cr\cr
+\bold{su} and \bold{sr} are for birch calculated using the function for pine. \cr\cr
+\bold{fl}, \bold{rf} and \bold{rc} are for birch calculated as \bold{sw}*f, where f is a factor derived from ??
 }
 \author{
 Marius Hauglin & Ole Martin Bollandsås (2013-2017) \email{marius.hauglin@gmail.com}
