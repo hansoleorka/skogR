@@ -10,7 +10,7 @@
 #' @param rel_factor numerical; if correction is TRUE a relascope factor must be given.
 #' @param plot_radius numerical; the plot radius in m. 
 #' @param outside_plot logical vector; indicating if a tree is outside the plot. Optional. 
-#' @param biomass_components character vector; calculate plotwise biomass for the given components. See help 
+#' @param biomass_components character vector; calculate plotwise biomass for the given components in Mg/ha. See help 
 #' in function biomassTree. 
 #' Trees outside the plot will only be used to calculate the correction factor.
 #' @param separate_sampletrees logical; Determines if sample trees are only used for calculation of correction factor.

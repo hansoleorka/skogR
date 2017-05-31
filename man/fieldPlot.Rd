@@ -26,7 +26,7 @@ fieldPlot(plotid, d, sp, h, plot_radius, correction = FALSE,
 
 \item{outside_plot}{logical vector; indicating if a tree is outside the plot. Optional.}
 
-\item{biomass_components}{character vector; calculate plotwise biomass for the given components. See help
+\item{biomass_components}{character vector; calculate plotwise biomass for the given components in Mg/ha. See help
 in function biomassTree.
 Trees outside the plot will only be used to calculate the correction factor.}
 

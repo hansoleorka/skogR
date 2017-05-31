@@ -1,4 +1,4 @@
-#' BIOMASS FUNCTIONS (Marklund, 1988)
+#' BIOMASS FUNCTIONS 
 #' 
 #' Single-tree biomass functions for spruce, pine and birch.
 #'
@@ -11,18 +11,18 @@
 #'  \item \bold{sb}  Biomass of stem bark
 #'  \item \bold{sw}  Stem wood biomass
 #'  \item \bold{st}  Total stem biomass (sw+sb)
-#'  \item \bold{fl}  Foliage biomass
+#'  \item \bold{fl}  Foliage biomass ¤
 #'  \item \bold{cr}  Crown biomass 
 #'  \item \bold{br}  Branch biomass (cr-fl)
 #'  \item \bold{db}  Biomass of dead branches
-#'  \item \bold{su}  Stump biomass *
-#'  \item \bold{rf}  Biomass of fine roots *
-#'  \item \bold{rc}  Biomass of coarse roots *
+#'  \item \bold{su}  Stump biomass * §
+#'  \item \bold{rf}  Biomass of fine roots *  ¤
+#'  \item \bold{rc}  Biomass of coarse roots * ¤
 #'  \item \bold{rs}  Biomass of roots (rc+rf) *
-#'  \item \bold{sr}  Biomass of stump-root system *
+#'  \item \bold{sr}  Biomass of stump-root system * §
 #'  \item \bold{ab}  Total aboveground biomass (st + cr + su + db)
-#'  \item \bold{bg}  Total belowground biomass (Petterson & Ståhl 2006)
-#'  \item \bold{tb}  Total tree biomass (st + cr + db + bg)
+#'  \item \bold{bg}  Total belowground biomass (using Petterson & Ståhl 2006) * **
+#'  \item \bold{tb}  Total tree biomass (ab + bg) 
 #' 
 #' 
 #'  \item \bold{all}  All the above components
@@ -33,24 +33,20 @@
 #' @note \code{h} is optional. Marklund include functions with diameter alone, and with diameter 
 #' and height as explanatory variables for most biomass components. 
 #' Note that for some components only functions with 
-#' diameter as single explanatory variable are available (marked with * in the list above). 
-#' For these biomass components the 
-#' values from the functions with diameter as single explanatory variable will 
-#' be returned for spruce and pine, \emph{even if height values are provided.}
-#' For birch there are no functions for these biomass components 
-#' (marked with *) so NAs will be returned. 
-#' In the case of the crown biomass component (\bold{cr}) for birch the function with 
-#' diameter as single explanatory variable is the only  
-#' available function, thus the value from this is returned, 
-#' \emph{even if height values are provided.}
-#'
+#' diameter as a single explanatory variable are available (marked with * in the list above). 
+#' ** according to FAO the stump is included in the above-ground biomass. \bold{su} is subtracted from the below-ground biomass
+#' calculated using Petterson & Ståhl's function, since this initially includes the stump.
+#' § \bold{su} and \bold{sr} are for birch calculated using the function for pine.
+#' ¤ \bold{fl}, \bold{rf} and \bold{rc} are for birch calculated as \bold{sw}*f, where f is a factor derived from ??
+#'  
 #' @references Marklund, L.G., 1988. Biomass functions for pine, 
 #' spruce and birch in Sweden (Report No. 45). Swedish University of Agricultural Sciences, Umeå.
 #' @references Petersson, H. & Ståhl, G. 2006. Functions for below-ground biomass of Pinus sylvestris, Picea abies, Betula pendula and Betula pubescens in Sweden. 
 #' Scandinavian Journal of Forest Research 21(Suppl 7): 84-93
-
+#' @references FAO, 2010. Global Forest Resources Assessement 2010 - Terms and definitions. 
+#' Food and Agriculture Organization of the United Nations Working paper 144/E.
 #'
-#' @author Marius Hauglin (2013-2017) \email{marius.hauglin@@nmbu.no}
+#' @author Marius Hauglin & Ole Martin Bollandsås (2013-2017) \email{marius.hauglin@@gmail.com}
 #' @export
 
 
@@ -68,7 +64,7 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 	
 	# create logical variables from components string vector
 	br<-db<-fl<-cr<-su<-rf<-rc<-rs<-sb<-sr<-sw<-st<-ab<-bg<-tb<- FALSE
-	for (i in components) eval( parse(text=paste("if ('",i,"' %in% components) ",i," <- TRUE",sep='')) )
+	for (i in components) eval( parse(text=paste0("if ('",i,"' %in% components) ",i," <- TRUE")) )
 	if ('all' %in% components) br<-db<-fl<-cr<-su<-rf<-rc<-rs<-sb<-sr<-sw<-st<-ab<-bg<-tb<- TRUE
 	
 	
@@ -144,9 +140,9 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 	# birch
 	cr_3<- dfun(10,10.2806,-3.3633) # Not h	
 	su_3<-su_2 # bruker funksjon for furu
-	fl_3<-sw_3 * 0.011/0.52	   # faktor fra ? Zianis?
-	rf_3<-sw_3 * 0.042/0.52   # faktor fra ? Zianis?      
-	rc_3<-sw_3 * 0.042/0.52   # faktor fra ? Zianis?
+	fl_3<-sw_3 * 0.011/0.52	   # faktor fra ? 
+	rf_3<-sw_3 * 0.042/0.52   # faktor fra ? 
+	rc_3<-sw_3 * 0.042/0.52   # faktor fra ? 
 	sr_3<-sr_2 # bruker funksjon for furu
 
 	
@@ -155,22 +151,18 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 	bg_2<-(exp((0.35449^2)  / 2 + 3.44275 + (d*10) / ((d*10) + 113) * 11.06537))/1000
 	bg_3<-(exp((0.36266^2)  / 2 + 6.1708  + (d*10) / ((d*10) + 225) * 10.01111))/1000 
 	
-	# Calculate combined components
-	br_1<-cr_1-fl_1
-	br_2<-cr_2-fl_2
-	br_3<-cr_3-fl_3
-
-	rs_1<-rc_1+rf_1
-	rs_2<-rc_2+rf_2
-	rs_3<-rc_3+rf_3
-
-	ab_1<-sw_1+sb_1+cr_1+su_1+db_1 
-	ab_2<-sw_2+sb_2+cr_2+su_2+db_2
-	ab_3<-sw_3+sb_3+cr_3+su_3+db_3
+	bg_1<-bg_1-su_1
 	
-	tb_1<-sw_1+sb_1+cr_1+db_1+bg_1 
-	tb_2<-sw_2+sb_2+cr_2+db_2+bg_2
-	tb_3<-sw_3+sb_3+cr_3+db_3+bg_3
+	# Calculate combined components
+	for (i in 1:3){
+		
+		eval( parse(text=paste0('bg_',i,'<-bg_',i,'-su_',i)) )
+		eval( parse(text=paste0('br_',i,'<-cr_',i,'-fl_',i)) )
+		eval( parse(text=paste0('rs_',i,'<-rc_',i,'+rf_',i)) )
+		eval( parse(text=paste0('ab_',i,'<-sw_',i,'+sb_',i,'+cr_',i,'+db_',i)) )
+		eval( parse(text=paste0('tb_',i,'<-ab_',i,'+bg_',i)) )
+	}
+	
 	
 	
 	# Subset according to species
@@ -181,9 +173,9 @@ biomassTree<-function(d,h=NA,sp,components=c('all')){
 	colnames(out)<-out.colums
 
 	for (i in out.colums) {
-		eval( parse(text=paste('out$',i,'[sp == 1]<-',i,'_1[sp == 1]',sep='')) )
-		eval( parse(text=paste('out$',i,'[sp == 2]<-',i,'_2[sp == 2]',sep='')) )
-		eval( parse(text=paste('out$',i,'[sp == 3]<-',i,'_3[sp == 3]',sep='')) )
+		eval( parse(text=paste0('out$',i,'[sp == 1]<-',i,'_1[sp == 1]')) )
+		eval( parse(text=paste0('out$',i,'[sp == 2]<-',i,'_2[sp == 2]')) )
+		eval( parse(text=paste0('out$',i,'[sp == 3]<-',i,'_3[sp == 3]')) )
 	}
 	
 

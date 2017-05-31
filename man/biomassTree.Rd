@@ -2,7 +2,7 @@
 % Please edit documentation in R/biomassTree.R
 \name{biomassTree}
 \alias{biomassTree}
-\title{BIOMASS FUNCTIONS (Marklund, 1988)}
+\title{BIOMASS FUNCTIONS}
 \usage{
 biomassTree(d, h = NA, sp, components = c("all"))
 }
@@ -19,18 +19,18 @@ biomassTree(d, h = NA, sp, components = c("all"))
  \item \bold{sb}  Biomass of stem bark
  \item \bold{sw}  Stem wood biomass
  \item \bold{st}  Total stem biomass (sw+sb)
- \item \bold{fl}  Foliage biomass
+ \item \bold{fl}  Foliage biomass ¤
  \item \bold{cr}  Crown biomass
  \item \bold{br}  Branch biomass (cr-fl)
  \item \bold{db}  Biomass of dead branches
- \item \bold{su}  Stump biomass *
- \item \bold{rf}  Biomass of fine roots *
- \item \bold{rc}  Biomass of coarse roots *
+ \item \bold{su}  Stump biomass * §
+ \item \bold{rf}  Biomass of fine roots *  ¤
+ \item \bold{rc}  Biomass of coarse roots * ¤
  \item \bold{rs}  Biomass of roots (rc+rf) *
- \item \bold{sr}  Biomass of stump-root system *
+ \item \bold{sr}  Biomass of stump-root system * §
  \item \bold{ab}  Total aboveground biomass (st + cr + su + db)
- \item \bold{bg}  Total belowground biomass (Petterson & Ståhl 2006)
- \item \bold{tb}  Total tree biomass (st + cr + db + bg)
+ \item \bold{bg}  Total belowground biomass (using Petterson & Ståhl 2006) * **
+ \item \bold{tb}  Total tree biomass (ab + bg)
 
 
  \item \bold{all}  All the above components
@@ -46,19 +46,14 @@ Single-tree biomass functions for spruce, pine and birch.
 \code{h} is optional. Marklund include functions with diameter alone, and with diameter
 and height as explanatory variables for most biomass components.
 Note that for some components only functions with
-diameter as single explanatory variable are available (marked with * in the list above).
-For these biomass components the
-values from the functions with diameter as single explanatory variable will
-be returned for spruce and pine, \emph{even if height values are provided.}
-For birch there are no functions for these biomass components
-(marked with *) so NAs will be returned.
-In the case of the crown biomass component (\bold{cr}) for birch the function with
-diameter as single explanatory variable is the only
-available function, thus the value from this is returned,
-\emph{even if height values are provided.}
+diameter as a single explanatory variable are available (marked with * in the list above).
+** according to FAO the stump is included in the above-ground biomass. \bold{su} is subtracted from the below-ground biomass
+calculated using Petterson & Ståhl's function, since this initially includes the stump.
+§ \bold{su} and \bold{sr} are for birch calculated using the function for pine.
+¤ \bold{fl}, \bold{rf} and \bold{rc} are for birch calculated as \bold{sw}*f, where f is a factor derived from ??
 }
 \author{
-Marius Hauglin (2013-2017) \email{marius.hauglin@nmbu.no}
+Marius Hauglin & Ole Martin Bollandsås (2013-2017) \email{marius.hauglin@gmail.com}
 }
 \references{
 Marklund, L.G., 1988. Biomass functions for pine,
@@ -66,5 +61,8 @@ spruce and birch in Sweden (Report No. 45). Swedish University of Agricultural S
 
 Petersson, H. & Ståhl, G. 2006. Functions for below-ground biomass of Pinus sylvestris, Picea abies, Betula pendula and Betula pubescens in Sweden.
 Scandinavian Journal of Forest Research 21(Suppl 7): 84-93
+
+FAO, 2010. Global Forest Resources Assessement 2010 - Terms and definitions.
+Food and Agriculture Organization of the United Nations Working paper 144/E.
 }
 
