@@ -29,7 +29,7 @@ biomassTree(d, h = NA, sp, components = c("all"))
  \item \bold{rs}  Biomass of roots (rc+rf)
  \item \bold{sr}  Biomass of stump-root system
  \item \bold{ab}  Total aboveground biomass (st + cr + su + db)
- \item \bold{bg}  Total belowground biomass (using Petterson & Ståhl 2006)
+ \item \bold{bg}  Total belowground biomass (using Petersson & Ståhl 2006)
  \item \bold{tb}  Total tree biomass (ab + bg)
 
 
