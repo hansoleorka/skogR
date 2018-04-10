@@ -1,4 +1,4 @@
-#' HeightDiffSi.R
+#' HeightDiffSi
 #' 
 #' Function for computing height-differential site index
 #' 
