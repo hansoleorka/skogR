@@ -10,7 +10,7 @@
 #' @param T13 Age
 #' @param Dmb Diamter under bark
 #' @return Annual diameter increment with bark (mm)
-#' @details ?
+#' @details TODO: Need to check if function is correct. 
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
 #' @references Blingsmo, K. R. 1984. Diametertilvekstfunksjoner for bjork-,furu- og granbestand. NISK-rapport 7/84.
 #' @export
