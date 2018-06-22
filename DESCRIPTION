@@ -8,4 +8,5 @@ Maintainer: Hans Ole /Slash{O}rka <hans.ole.orka@gmail.com>
 Description: Norske skogfunksjoner (Norwegian Forestry Functions)
 License: GPL-2
 LazyLoad: yes
+LazyData: no
 RoxygenNote: 6.0.1
