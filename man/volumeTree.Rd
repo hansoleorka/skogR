@@ -41,8 +41,6 @@ v volum in liters (dm3)
 }
 \description{
 Compute stem volume of single trees using Norwegian single tree volume functions
-
-2
 }
 \details{
 Dette er en hovedfuksjon.
