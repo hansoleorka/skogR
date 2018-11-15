@@ -14,6 +14,7 @@
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
 #' @references Vestjordet 1959,Brantseg 1959,Næsset 1994a, Næsset 1995a,b
 #' @export
+#' @name diameterIncrementTree
 #' @examples
 #' load(file="data/skogRtrees.rda")
 #' attach(skogRtrees)

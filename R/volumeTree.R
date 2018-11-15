@@ -2,6 +2,8 @@
 #' 
 #' Compute stem volume of single trees using Norwegian single tree volume functions
 #' 
+#' @name volumeTree
+#' 
 #' @param d Diameter in breast height in centimeter 
 #' @param h Tree height in meter
 #' @param sp vektor med treslag; 1=gran, 2=furu, 3=lauv

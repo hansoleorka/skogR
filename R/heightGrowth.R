@@ -2,6 +2,8 @@
 #' 
 #' Function for future dominant height prognoses
 #' 
+#' @name heightGrowth
+#' 
 #' @param Hdt1 a numeric vector of initial dominant heights (m) 
 #' @param H40 site index (m)
 #' @param years observation period (nr of years between time points 1 and 2)
@@ -17,7 +19,7 @@
 #' HeightGrowth(Hdt1=a, H40=b, years=15, ts=1)
 #' @export
 
-HeightGrowth <- function( Hdt1, H40, years, ts ) {
+heightGrowth <- function( Hdt1, H40, years, ts ) {
   
   Hdt1 <- Hdt1 - 1.3
   

@@ -2,6 +2,8 @@
 #' 
 #' calculate site index according to the Norwegian H40 system
 #' 
+#' @name siteIndex
+#' 
 #' @param age age at breast height (years)
 #' @param HO top height, i.e. mean of the 100 largest trees with respect to dbh per hectar (m)
 #' @param SP species code (1=spruce, 2= pine, 3= birch)
@@ -17,7 +19,7 @@
 #' SiteIndex( a, b, 1) 
 #' @export
 
-SiteIndex <- function( age, HO, SP, method = "SHARMA-BRUNNER" ) {
+siteIndex <- function( age, HO, SP, method = "SHARMA-BRUNNER" ) {
 
   HO <- HO - 1.3
   

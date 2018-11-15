@@ -2,6 +2,8 @@
 #' 
 #' Function for computing height-differential site index
 #' 
+#' @name heightDiffSi
+#' 
 #' @param Hdt1 a numeric vector of initial dominant heights (m) 
 #' @param Hdt2 a numeric vector of dominant heights (m) at the second point in time
 #' @param t observation period (nr of years between time points 1 and 2)
@@ -17,7 +19,7 @@
 #' HeightDiffSi(a, b, 15, 1)
 #' @export
 
-HeightDiffSi <- function( Hdt1, Hdt2, t, ts ) {
+heightDiffSi <- function( Hdt1, Hdt2, t, ts ) {
   
   Hdt1 <- Hdt1 - 1.3
   Hdt2 <- Hdt2 - 1.3

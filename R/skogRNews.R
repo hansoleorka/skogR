@@ -2,6 +2,8 @@
 #' 
 #' Show the NEWS file of the NorForFunc package.     
 #' 
+#' @name skogR.News
+#' 
 #' @return None
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
 #' @examples 

@@ -3,6 +3,8 @@
 #' THIS FUNCTION CALCULATES ANNUAL DIAMETER INCREMENT IN MM WITH BARK FOR THE NORWEGIAN SPECIES 
 #' SPRUCE, PINE, BIRCH AND ASPEN (GRAN, FURU, BJERK ELLER OSP)
 #' 
+#' @name diameterIncrementStand
+#' 
 #' @param SP species code (1=spruce, 2= pine, 3= brich)
 #' @param Ho Topheight (m)
 #' @param H40 Site index
@@ -14,6 +16,7 @@
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}
 #' @references Blingsmo, K. R. 1984. Diametertilvekstfunksjoner for bjork-,furu- og granbestand. NISK-rapport 7/84.
 #' @export
+#' @examples 
 #' diameterIncrementStand(1,17,150,20)
 #' diameterIncrementStand(1,17,150,20,20,80)
 diameterIncrementStand <- function(TS,H40,N2,Dmb,Ho=NULL,T13=NULL){

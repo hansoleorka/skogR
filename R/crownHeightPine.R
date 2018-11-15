@@ -2,6 +2,8 @@
 #' 
 #' Compute crown height of single trees using Norwegian only for pine... 
 #' 
+#' @name crownHeightPine
+#' 
 #' @param d Diameter in breast height (cm) 
 #' @param h Tree height (m)
 #' @return k crownheight (m)

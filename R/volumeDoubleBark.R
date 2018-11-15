@@ -2,6 +2,8 @@
 #' 
 #' Functions for calculation of doublebark in milimeter 
 #' 
+#' @name volumeDoubleBark
+#' 
 #' @param d Diameter in breast hegiht i centimeter including bark
 #' @param h Tree height in meter
 #' @param sp species codes (1=spruce, 2=pine, 3=Birch) 

@@ -2,11 +2,14 @@ rm(list = ls())
 
 source("R/diameterIncrementTree.R")
 source("R/mortalityTree.R")
-source("R/HeightGrowth.R")
+source("R/heightGrowth.R")
 source("R/heightRelativGrowthTree.R")
 source("R/diameterIncrementStand.R")
 
 load(file="data/skogRtrees.rda")
+
+library(skogR)
+data(skogRtrees)
 attach(skogRtrees)
 #Compute BAL
 BAL <- c()

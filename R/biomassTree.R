@@ -2,6 +2,8 @@
 #' 
 #' Single-tree biomass functions for spruce, pine and birch.
 #'
+#' @name biomassTree
+#'  
 #' @param d Numerical vector with diameter at breast height (cm)
 #' @param h Numerical vector with tree heights (m)
 #' @param sp Numerical vector with tree species (1 = Norway spruce, 2 = Scots Pine, 3 = Birch)

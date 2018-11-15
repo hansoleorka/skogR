@@ -2,6 +2,8 @@
 #' 
 #' Calculates dominant height for Norway spruce (Picea abies (L.) Karst.) and Scots pine (Pinus sylvestris L.) in Norway. 
 #' 
+#' @name heightStandDominantDevelopment
+#' 
 #' @param H40 Site index of spruce (H40-system m.)
 #' @param AGE Stand age
 #' @param DominantSpecies Dominant species of the stand (species code: 1=spruce, 2= pine)

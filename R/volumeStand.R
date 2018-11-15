@@ -2,6 +2,8 @@
 #' 
 #' Compute stand volume based on Norwegian stand volume functions
 #' 
+#' @name volumeStand
+#' 
 #' @param G Basal area (m2/ha)
 #' @param HL Lorey's Mean heigh (m)
 #' @param SP species code (1=spruce, 2= pine, 3= brich)

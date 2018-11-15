@@ -2,6 +2,8 @@
 #' 
 #' #' 'Model for survival. Original model by Eid & Tuhus (2005). Later (april 2007) the model was modified to a more simple model and to include basal area. Eid, T. & Tuhus, E., (2005). Models for individual tree mortality in Norway. For. Ecol. Manage. 154: 69-84
 #' 
+#' @name mortalityTree
+#' 
 #' @param species species code (1=spruce, 2= pine, 3= brich, 4 = other broadleaves )
 #' @param d  Diameter of the single tree at breast height (cm), Diameter (cm)(Publication uses cm, parameter estimate adjusted)
 #' @param BA Stand basal area (m2ha-1)

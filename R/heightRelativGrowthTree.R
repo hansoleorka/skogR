@@ -2,6 +2,8 @@
 #' 
 #' Calculate relative height growth of singler trees based on Sharma et al. 2017
 #' 
+#' @name heightRelativGrowthTree
+#' 
 #' @param d Diameter of the single tree at breast height (cm)
 #' @param sp species code (1=spruce, 2= pine, 3= brich)
 #' @param CIndex competition index to be used only "CI4" implemented
