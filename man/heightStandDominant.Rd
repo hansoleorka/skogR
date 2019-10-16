@@ -25,7 +25,7 @@ Index age is 40
 \examples{
 H40 <- c(11,14,17,20,23)
 age <- c(40,40,40,50,60)
-HeightFunc( H40 = H40, age = age , SP = 2 )
+heightStandDominant( H40 = H40, age = age , SP = 2 )
 }
 \references{
 Sharma et. al. (2011), Eriksson et. al. (1997), Opdahl (1992)

@@ -7,3 +7,5 @@ library(devtools)
 install_github("hansoleorka/skogR")
 
 ?devtools::document()
+
+library(skogR)
