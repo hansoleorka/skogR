@@ -5,12 +5,12 @@
 #' 
 #' @name diameterIncrementStand
 #' 
-#' @param SP species code (1=spruce, 2= pine, 3= brich)
-#' @param Ho Topheight (m)
+#' @param TS species code (1=spruce, 2= pine, 3= brich)
 #' @param H40 Site index
 #' @param N2 Number of stems after thining
-#' @param T13 Age
 #' @param Dmb Diamter under bark
+#' @param Ho Topheight (m)
+#' @param T13 Age
 #' @return Annual diameter increment with bark (mm)
 #' @details TODO: Need to check if function is correct. 
 #' @author Hans Ole Ørka \email{hans.ole.orka@@gmail.org}

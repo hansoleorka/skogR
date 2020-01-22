@@ -4,17 +4,17 @@
 \alias{diameterIncrementStand}
 \title{Annual diameter increment with bark}
 \arguments{
-\item{SP}{species code (1=spruce, 2= pine, 3= brich)}
-
-\item{Ho}{Topheight (m)}
+\item{TS}{species code (1=spruce, 2= pine, 3= brich)}
 
 \item{H40}{Site index}
 
 \item{N2}{Number of stems after thining}
 
-\item{T13}{Age}
-
 \item{Dmb}{Diamter under bark}
+
+\item{Ho}{Topheight (m)}
+
+\item{T13}{Age}
 }
 \value{
 Annual diameter increment with bark (mm)
