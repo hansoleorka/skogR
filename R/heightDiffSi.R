@@ -66,7 +66,7 @@ heightDiffSi <- function( Hdt1, Hdt2, t, ts ) {
 
   for( i in 1 : nrow( heights.t2 ) ) {
     for( j in 1 : ncol( heights.t2 ) ) {
-      heights.t2[ i,j ] <- HeightGrowth(Hdt1[ i ] + 1.3, H40[ j ], t, ts)
+      heights.t2[ i,j ] <- heightGrowth(Hdt1[ i ] + 1.3, H40[ j ], t, ts)
       if( is.na( heights.t2[ i,j ] ) ) {
         j = j + 1
       } else if(  heights.t2[ i,j ] - 1.3 > Hdt2[ i ] ) {
