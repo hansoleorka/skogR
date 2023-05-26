@@ -9,4 +9,4 @@ Description: Norske skogfunksjoner (Norwegian Forestry Functions)
 License: GPL-2
 LazyLoad: yes
 LazyData: no
-RoxygenNote: 7.0.2
+RoxygenNote: 7.2.3

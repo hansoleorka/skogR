@@ -12,19 +12,19 @@
 #'  \itemize{
 #'  \item \bold{sb}  Biomass of stem bark
 #'  \item \bold{sw}  Stem wood biomass
-#'  \item \bold{st}  Total stem biomass (sw+sb)
+#'  \item \bold{st}  Total stem biomass (independent model including sw and sb)
 #'  \item \bold{fl}  Foliage biomass 
 #'  \item \bold{cr}  Crown biomass 
-#'  \item \bold{br}  Branch biomass (cr-fl)
+#'  \item \bold{br}  Branch biomass (sum of predictions of cr + fl)
 #'  \item \bold{db}  Biomass of dead branches
 #'  \item \bold{su}  Stump biomass 
 #'  \item \bold{rf}  Biomass of fine roots 
 #'  \item \bold{rc}  Biomass of coarse roots 
-#'  \item \bold{rs}  Biomass of roots (rc+rf)
+#'  \item \bold{rs}  Biomass of roots (sum of predictions of rc + rf)
 #'  \item \bold{sr}  Biomass of stump-root system 
-#'  \item \bold{ab}  Total aboveground biomass (st + cr + su + db)
+#'  \item \bold{ab}  Total aboveground biomass (sum of predictions of sw + sb + cr + su + db)
 #'  \item \bold{bg}  Total belowground biomass (using Petersson & Ståhl 2006) 
-#'  \item \bold{tb}  Total tree biomass (ab + bg) 
+#'  \item \bold{tb}  Total tree biomass (sum of predictions of ab + bg) 
 #' 
 #' 
 #'  \item \bold{all}  All the above components
