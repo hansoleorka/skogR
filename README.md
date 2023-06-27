@@ -23,7 +23,7 @@ install_github("hansoleorka/skogR")
 
 |Parameter     | Description                           | Unit  |
 |------------- |-------------                          |-----|
-|HL            |Torey's Mean heigh                            |   meter |
+|HL            |Lorey's Mean heigh                            |   meter |
 |Ho            |Topheight                             |   meter |
 |G            |Basal area                             |   m2/ha |
 |SP            |Species code                          |1=spruce, 2= pine, 3= brich  |
