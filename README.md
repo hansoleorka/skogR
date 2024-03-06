@@ -3,13 +3,13 @@ skogR
 
 Norske skogfunksjoner (Norwegian Forestry Functions)
 
-Install
+# Install
 ```{r install}
 library(devtools)
 install_github("hansoleorka/skogR")
 ```
 
-### List of parameters used in package 
+# List of parameters used in package 
 
 #### Tree level parameters
 |Parameter     | Description                           | Unit  |
