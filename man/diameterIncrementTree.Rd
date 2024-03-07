@@ -3,16 +3,19 @@
 \name{diameterIncrementTree}
 \alias{diameterIncrementTree}
 \title{Calculates: Five-year diameter increment of a single tree (mm per 5 yr).}
+\usage{
+diameterIncrementTree(speciesCode, d, BAL, SI, BA, region, LAT)
+}
 \arguments{
 \item{speciesCode}{species code (1=spruce, 2= pine, 3= brich)}
 
 \item{d}{Diameter of the single tree at breast height (cm)}
 
-\item{BA}{Stand basal area (m2ha-1)}
-
 \item{BAL}{Sum grunnflate på trær større enn treet man beregner for.}
 
 \item{SI}{Site index of spruce (H40-system m.)}
+
+\item{BA}{Stand basal area (m2ha-1)}
 
 \item{region}{Dummy variable for region. =1 --> County nr >=10}
 

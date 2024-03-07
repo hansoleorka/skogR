@@ -3,6 +3,9 @@
 \name{volumeStand}
 \alias{volumeStand}
 \title{Stand volume}
+\usage{
+volumeStand(G, HL, SP, Vestlandet = NULL)
+}
 \arguments{
 \item{G}{Basal area (m2/ha)}
 

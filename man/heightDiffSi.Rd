@@ -4,7 +4,7 @@
 \alias{heightDiffSi}
 \title{HeightDiffSi}
 \usage{
-heightDiffSi(Hdt1, Hdt2, t, ts)
+heightDiffSi(Hdt1, Hdt2, t, ts, depreciated = TRUE)
 }
 \arguments{
 \item{Hdt1}{a numeric vector of initial dominant heights (m)}
@@ -14,12 +14,14 @@ heightDiffSi(Hdt1, Hdt2, t, ts)
 \item{t}{observation period (nr of years between time points 1 and 2)}
 
 \item{ts}{species code (1=spruce, 2= pine)}
+
+\item{depreciated}{force to use function by setting FALSE}
 }
 \value{
 H40 site index (m)
 }
 \description{
-Function for computing height-differential site index
+Function for computing height-differential site index (DEPRECIATED)
 }
 \details{
 Reference age of 40 years
@@ -27,7 +29,7 @@ Reference age of 40 years
 \examples{
 a <- c(8,20) # initial dominant heights
 b <- c(10.23744,24.81046) # heights at time point 2
-HeightDiffSi(a, b, 15, 1)
+heightDiffSi(a, b, 15, 1)
 }
 \references{
 Sharma et al (2011)

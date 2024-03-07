@@ -3,6 +3,9 @@
 \name{skogR.News}
 \alias{skogR.News}
 \title{Show the NEWS file.}
+\usage{
+skogR.News()
+}
 \value{
 None
 }

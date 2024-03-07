@@ -3,12 +3,15 @@
 \name{mortalityTree}
 \alias{mortalityTree}
 \title{Calculates 5 year mortality rate for tree-species}
+\usage{
+mortalityTree(d, sp, BA)
+}
 \arguments{
-\item{species}{species code (1=spruce, 2= pine, 3= brich, 4 = other broadleaves )}
-
 \item{d}{Diameter of the single tree at breast height (cm), Diameter (cm)(Publication uses cm, parameter estimate adjusted)}
 
 \item{BA}{Stand basal area (m2ha-1)}
+
+\item{species}{species code (1=spruce, 2= pine, 3= brich, 4 = other broadleaves )}
 }
 \value{
 5 year mortality rate

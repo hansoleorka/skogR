@@ -3,6 +3,9 @@
 \name{heightRelativGrowthTree}
 \alias{heightRelativGrowthTree}
 \title{Calculates relative height growth of single trees}
+\usage{
+heightRelativGrowthTree(d, sp, CIndex = "CI4")
+}
 \arguments{
 \item{d}{Diameter of the single tree at breast height (cm)}
 

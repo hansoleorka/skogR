@@ -3,6 +3,9 @@
 \name{crownHeightPine}
 \alias{crownHeightPine}
 \title{Crown height of pine}
+\usage{
+crownHeightPine(d, h)
+}
 \arguments{
 \item{d}{Diameter in breast height (cm)}
 

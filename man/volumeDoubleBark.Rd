@@ -3,6 +3,9 @@
 \name{volumeDoubleBark}
 \alias{volumeDoubleBark}
 \title{Helpfunctions for volume: Doublebarkthickness}
+\usage{
+volumeDoubleBark(d, h, sp, Fitje1995 = FALSE)
+}
 \arguments{
 \item{d}{Diameter in breast hegiht i centimeter including bark}
 

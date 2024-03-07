@@ -3,10 +3,13 @@
 \name{heightStandDominantDevelopment}
 \alias{heightStandDominantDevelopment}
 \title{Dominant height development (Sharma et al. 2011)}
+\usage{
+heightStandDominantDevelopment(AGE, H40, DominantSpecies)
+}
 \arguments{
-\item{H40}{Site index of spruce (H40-system m.)}
-
 \item{AGE}{Stand age}
+
+\item{H40}{Site index of spruce (H40-system m.)}
 
 \item{DominantSpecies}{Dominant species of the stand (species code: 1=spruce, 2= pine)}
 }

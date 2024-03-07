@@ -3,6 +3,9 @@
 \name{diameterIncrementStand}
 \alias{diameterIncrementStand}
 \title{Annual diameter increment with bark}
+\usage{
+diameterIncrementStand(TS, H40, N2, Dmb, Ho = NULL, T13 = NULL)
+}
 \arguments{
 \item{TS}{species code (1=spruce, 2= pine, 3= brich)}
 
