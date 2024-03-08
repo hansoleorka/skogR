@@ -29,6 +29,8 @@ heightStandDominant( H40 = H40, age = age , SP = 2 )
 }
 \references{
 Sharma et. al. (2011), Eriksson et. al. (1997), Opdahl (1992)
+Sharma, R. P., Brunner, A., Eid, T., & Øyen, B.-H. (2011). Modelling dominant height growth from national forest inventory individual tree data with short time series and large age errors. Forest Ecology and Management, 262(12), 2162–2175. https://doi.org/10.1016/j.foreco.2011.07.037
+Opdahl, H. 1992. Bonitet, vekst og produksjon hos osp (Popolus Tremula L.) i Sør-Norge = Site-index, growth and yield in Aspen (Popolus tremula L.) stands in South Norway 44 s. : ill. (Meddelelser fra Skogforsk ; 44.11) ISBN: 82-7169-527-4
 }
 \seealso{
 SiteIndex, HeightDiffSi, HeightGrowth, BhAge
