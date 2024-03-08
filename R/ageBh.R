@@ -1,4 +1,4 @@
-## ageDBH ####
+## ageBh ####
 #'
 #' Calculate age at breast height from site index, top height and species
 #'
@@ -12,10 +12,10 @@
 #' @examples
 #' H40 <- c(11,14,17,20,23) 
 #' Ho <- c(13.995,11.169,21.267,24.81046,28.32)
-#' ageDBH( H40 , Ho, 1 )
+#' ageBh( H40 , Ho, 1 )
 #' @export
 
-ageDBH <- function(H40, Ho, SP) { 
+ageBh <- function(H40, Ho, SP) { 
      
      H40 <- H40 - 1.3
      

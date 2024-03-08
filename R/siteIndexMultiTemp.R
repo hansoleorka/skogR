@@ -27,7 +27,7 @@ siteIndexMultiTemp <- function( Ho , yrs , SP ){
      residuals <- res <- a <- c()
      ages <- list()
      for( si in 1 : 40 ){
-          lastage <- ageDBH(  si, Ho[ length( Ho ) ] , SP )
+          lastage <- ageBh(  si, Ho[ length( Ho ) ] , SP )
           lastyr <- yrs[ length( Ho ) ]
           lastyr
           r=1
@@ -56,7 +56,7 @@ siteIndexMultiTemp <- function( Ho , yrs , SP ){
      length( SI_seq )
      for( si in 1:length( SI_seq ) ){
           
-          lastage <- ageDBH( SI_seq[ si ], Ho[ length( Ho ) ] , SP )
+          lastage <- ageBh( SI_seq[ si ], Ho[ length( Ho ) ] , SP )
           lastyr <- yrs[ length( Ho ) ]
           lastage
           lastyr
