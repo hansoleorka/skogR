@@ -20,8 +20,8 @@
 siteIndexMultiTemp <- function( Ho , yrs , SP ){
      
      if( length( Ho ) < 2 ) { return( list( NA , NA , NA ) ) } # There needs to be at least two points in time 
-     if(any(diff( Ho ) < 0 )) { return( list( NA , NA , NA ) ) } # All heights need to be increasing 
-     if(any(diff( yrs ) < 0 )) { return( list( NA , NA , NA ) ) } # All years need to be increasing
+     if(any(diff( Ho ) < 1 )) { return( list( NA , NA , NA ) ) } # All heights need to be increasing 
+     if(any(diff( yrs ) < 1 )) { return( list( NA , NA , NA ) ) } # All years need to be increasing
      
      # rough indication
      residuals <- res <- a <- c()
